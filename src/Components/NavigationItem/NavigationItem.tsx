@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import navigationItemStyles from './NavigationItem.module.css'
-import {BurgerIcon,ListIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {BurgerIcon,ListIcon, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 // @ts-ignore
 const NavigationItem = ({children,iconComponentName,active}) => {
 
@@ -12,6 +12,9 @@ const NavigationItem = ({children,iconComponentName,active}) => {
         }
         if (iconComponentName === 'ListIcon'){
             return <ListIcon type={active ? "primary" : "secondary"} />
+        }
+        if (iconComponentName === 'ProfileIcon'){
+            return <ProfileIcon type={active ? "primary" : "secondary"} />
         }
     }
 
