@@ -1,0 +1,30 @@
+.BurgerComponents {
+    min-width: 600px;
+}
+
+
+.BurgerComponents__locked {
+}
+
+.BurgerComponents__unlocked {
+    min-height: 480px;
+    max-height: 480px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.BurgerComponents__unlocked::-webkit-scrollbar{
+    width: 8px;
+
+}
+
+.BurgerComponents__unlocked::-webkit-scrollbar-track {
+    background: #2F2F37;
+    border: 1px dashed #4C4CFF;
+}
+
+.BurgerComponents__unlocked::-webkit-scrollbar-thumb{
+    background: #8585AD;
+    border: 3px solid #8585AD;
+    height: 292px;
+}

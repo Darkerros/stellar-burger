@@ -6,33 +6,13 @@ import Title from "../Title/Title";
 import Ingredients from "../Ingredients/Ingredients";
 
 // @ts-ignore
-const BurgerIngredients = ({ingredients}) => {
-    const [ingredientsGroup,setIngredientsGroup] = useState([])
-
-    useEffect(() => {
-        const groupIngredients = [
-            {type: "bun", name: "Булки",ingredientsList: []},
-            {type: "main", name: "Начинки",ingredientsList: []},
-            {type: "sauce", name: "Coусы",ingredientsList: []},
-        ]
-
-        ingredients.forEach((ingredient: { type: string; }) => {
-            groupIngredients.forEach((group,index) => {
-                if (group.type == ingredient.type){
-                    // @ts-ignore
-                    return groupIngredients[index].ingredientsList.push(ingredient)
-                }
-            })
-        })
-        // @ts-ignore
-        setIngredientsGroup(groupIngredients)
-    },[ingredients])
+const BurgerIngredients = ({groupedIngredients,getIngredientCountFn,addIngredientsToCartFn,...otherProps}) => {
 
     return (
         <div className={styles.BurgerIngredients}>
             <Title>Соберите бургер</Title>
             <Tabs classname={'mt-5'}/>
-            <Ingredients groupedIngredients={ingredientsGroup}/>
+            <Ingredients getIngredientCountFn={getIngredientCountFn} groupedIngredients={groupedIngredients} addIngredientsToCartFn={addIngredientsToCartFn}/>
         </div>
     );
 };
