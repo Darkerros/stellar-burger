@@ -8,7 +8,7 @@ const Navigation = () => {
         <nav className={navigationStyles.Navigation}>
             <NavigationItem iconComponentName="BurgerIcon" active={true}>Конструктор</NavigationItem>
             <NavigationItem iconComponentName="ListIcon" active={false}>Лента заказов</NavigationItem>
-            <Logo />
+            <div className={navigationStyles.Navigation__logo}><Logo /></div>
             <NavigationItem iconComponentName="ListIcon" active={false}>Личный кабинет</NavigationItem>
         </nav>
     );

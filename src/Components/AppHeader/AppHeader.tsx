@@ -4,7 +4,7 @@ import Navigation from "../Navigation/Navigation";
 
 const AppHeader = () => {
     return (
-        <header className={headerStyles.AppHeader + " mt-4 mb-4"}>
+        <header className={headerStyles.AppHeader + " pt-4 pb-4"}>
             <Navigation/>
         </header>
     );

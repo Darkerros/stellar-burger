@@ -1,0 +1,21 @@
+.Ingredients {
+    max-height: 756px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.Ingredients::-webkit-scrollbar{
+    width: 8px;
+
+}
+
+.Ingredients::-webkit-scrollbar-track {
+    background: #2F2F37;
+    border: 1px dashed #4C4CFF;
+}
+
+.Ingredients::-webkit-scrollbar-thumb{
+    background: #8585AD;
+    border: 3px solid #8585AD;
+    height: 492px;
+}
