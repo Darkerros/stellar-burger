@@ -1,6 +1,9 @@
 .IngredientsColumn{
 
 }
+.IngredientsColumn:nth-of-type(1){
+    margin-top: 0;
+}
 
 .IngredientsColumn__content{
     display: flex;

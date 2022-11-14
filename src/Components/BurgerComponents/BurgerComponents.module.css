@@ -1,5 +1,4 @@
 .BurgerComponents {
-    min-width: 600px;
 }
 
 
@@ -7,6 +6,7 @@
 }
 
 .BurgerComponents__unlocked {
+    position: relative;
     min-height: 480px;
     max-height: 480px;
     overflow: hidden;
@@ -15,7 +15,7 @@
 
 .BurgerComponents__unlocked::-webkit-scrollbar{
     width: 8px;
-
+    background: #2F2F37;
 }
 
 .BurgerComponents__unlocked::-webkit-scrollbar-track {

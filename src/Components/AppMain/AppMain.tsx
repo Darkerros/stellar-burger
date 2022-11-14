@@ -4,7 +4,6 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 
 import api from "../../api/Api";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import ingredients from "../Ingredients/Ingredients";
 
 // @ts-ignore
 const AppMain = () => {

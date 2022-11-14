@@ -7,9 +7,11 @@ import PriceInfo from "../PriceInfo/PriceInfo";
 // @ts-ignore
 const BurgerConstructor = ({currentBun,cartItemsList,deleteIngridientFromCartFn,cartPrice}) => {
     return (
-        <div className={burgerContructorStyles.BurgerConstructor}>
-            <BurgerComponents currentBun={currentBun} cartItemsList={cartItemsList} deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
-            <PriceInfo cartPrice={cartPrice}/>
+        <div className={burgerContructorStyles.BurgerConstructor + " pl-10"}>
+            <div className={burgerContructorStyles.BurgerConstructor_content + " mr-4 ml-4"}>
+                <BurgerComponents currentBun={currentBun} cartItemsList={cartItemsList} deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
+                <PriceInfo cartPrice={cartPrice}/>
+            </div>
         </div>
     );
 };
