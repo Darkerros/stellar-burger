@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 // @ts-ignore
 const Title = ({children}) => {
@@ -8,5 +9,7 @@ const Title = ({children}) => {
         </p>
     );
 };
+
+Title.propTypes = {children: PropTypes.string}
 
 export default Title;

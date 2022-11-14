@@ -1,6 +1,7 @@
 .Ingredient{
     position: relative;
     max-width: 272px;
+    list-style: none;
 }
 .Ingredient__count{
     position: absolute;

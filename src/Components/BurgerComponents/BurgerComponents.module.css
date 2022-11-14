@@ -11,6 +11,8 @@
     max-height: 480px;
     overflow: hidden;
     overflow-y: scroll;
+    padding-left: 0;
+    margin: 0;
 }
 
 .BurgerComponents__unlocked::-webkit-scrollbar{

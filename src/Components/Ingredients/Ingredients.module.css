@@ -2,6 +2,8 @@
     max-height: 664px;
     overflow: hidden;
     overflow-y: scroll;
+    padding: 0;
+    list-style: none;
 }
 
 .Ingredients::-webkit-scrollbar{

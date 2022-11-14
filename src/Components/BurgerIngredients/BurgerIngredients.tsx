@@ -1,20 +1,29 @@
-import React, {useEffect, useState} from 'react';
 // @ts-ignore
 import styles from "./BurgerIngredients.module.css"
 import Tabs from "../Tabs/Tabs";
 import Title from "../Title/Title";
 import Ingredients from "../Ingredients/Ingredients";
+import groupedIngredientsType from "../../types/groupedIngredientsType";
+import PropTypes from "prop-types";
 
 // @ts-ignore
-const BurgerIngredients = ({groupedIngredients,getIngredientCountFn,addIngredientsToCartFn,...otherProps}) => {
-
+const BurgerIngredients = ({groupedIngredients,getIngredientCountFn,addIngredientsToCartFn}) => {
+    // @ts-ignore
     return (
-        <div className={styles.BurgerIngredients}>
+        <section className={styles.BurgerIngredients}>
             <Title>Соберите бургер</Title>
-            <Tabs classname={'mt-5'}/>
+            <Tabs className={'mt-5'} tabNamingList={groupedIngredients.map((group: { name: string; }) => group.name)}/>
             <Ingredients getIngredientCountFn={getIngredientCountFn} groupedIngredients={groupedIngredients} addIngredientsToCartFn={addIngredientsToCartFn}/>
-        </div>
+        </section>
     );
 };
+
+BurgerIngredients.propTypes = {
+    groupedIngredients: groupedIngredientsType,
+    getIngredientCountFn: PropTypes.func,
+    addIngredientsToCartFn: PropTypes.func,
+}
+
+
 
 export default BurgerIngredients;
