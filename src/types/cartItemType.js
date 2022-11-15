@@ -11,7 +11,7 @@ const cartItemType = PropTypes.shape({
     type: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired,
     _id: PropTypes.string.isRequired,
-    cartItemId: PropTypes.number.isRequired
+    cartItemId: PropTypes.string
 })
 
 export default cartItemType;
