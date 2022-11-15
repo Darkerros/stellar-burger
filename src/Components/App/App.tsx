@@ -3,12 +3,13 @@ import './App.css';
 import AppHeader from "../AppHeader/AppHeader";
 import AppMain from "../AppMain/AppMain";
 import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 function App() {
     return (
         <div className="App">
             <AppHeader/>
-            <Modal></Modal>
+            <Modal><IngredientDetails/></Modal>
             {/*<AppMain />*/}
         </div>
     );
