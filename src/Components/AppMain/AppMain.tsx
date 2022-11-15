@@ -5,7 +5,10 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import api from "../../api/Api";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Loading from "../Loading/Loading";
+import {keyboard} from "@testing-library/user-event/dist/keyboard";
 
+// @ts-ignore
+// @ts-ignore
 // @ts-ignore
 const AppMain = () => {
         const [allIngredients, setAllIngredients] = useState([])
@@ -28,7 +31,7 @@ const AppMain = () => {
         useEffect(() => {
             api.getrIngredients()
                 .then(ingredientsList => {
-                    setAllIngredients(ingredientsList.data)
+                    setTimeout(() => setAllIngredients(ingredientsList.data),1000)
                 })
                 .catch()
         }, [])
@@ -36,9 +39,9 @@ const AppMain = () => {
         const groupedIngredients = useMemo(() => {
             const groupIngredients = [
                 {type: 'bun', name: 'Булки', ingredientsList: []},
-                {type: "main", name: 'Главное', ingredientsList: []},
-                {type: "sauce", name: 'Соусы', ingredientsList: []}]
-
+                {type: "sauce", name: 'Соусы', ingredientsList: []},
+                {type: "main", name: 'Главное', ingredientsList: []}
+                ]
             // @ts-ignore
             allIngredients.forEach(ingredient => groupIngredients.forEach(group => {
                 // @ts-ignore
@@ -78,30 +81,47 @@ const AppMain = () => {
             ingredientsCount[bun._id] = 1
             return ingredientsCount
         }, [allIngredients, bun, cartItemList])
+
+        const getRandomIngredient = () => allIngredients[getRandomIngredientIndex()]
+        const getRandomIngredientIndex = () => Math.floor(Math.random() * allIngredients.length)
+
         // @ts-ignore
         const getIngredientCount = (ingredientId) => ingredientsCounts[ingredientId]
         // @ts-ignore
-        const addIngredientToCart = (ingredient) => {
+        function addIngredientToCart(ingredient) {
             if (ingredient.type === 'bun') {
                 setBun(ingredient)
             } else {
-                const currentCart = {...cart}
+                const key = Date.now()
+                const cartNew = {}
                 // @ts-ignore
-                currentCart[Date.now()] = ingredient
-                setCart(currentCart)
-                console.log(cart)
+                cartNew[key] = ingredient
+                setCart({...cart,...cartNew})
             }
         }
         // @ts-ignore
-        const deleteIngridientFromCart = (cartItemId) => {
+        function deleteIngridientFromCart (cartItemId) {
             const cartItems = {...cart}
             // @ts-ignore
             delete cartItems[cartItemId]
             setCart(cartItems)
         }
 
+        useEffect(() => {
+            if (allIngredients.length !== 0) {
+                const randomCart = {}
+                for (let i = 0; i < getRandomIngredientIndex(); i++) {
+                    const key = Date.now() + 100 * i
+                    // @ts-ignore
+                    randomCart[key] = getRandomIngredient()
+                }
+                setCart(randomCart)
+            }
+        },[allIngredients])
+
+
         return (
-                allIngredients.length === 0
+            allIngredients.length === 0
                 ?
                 <Loading/>
                 :
