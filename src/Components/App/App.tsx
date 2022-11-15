@@ -10,8 +10,7 @@ function App() {
     return (
         <div className="App">
             <AppHeader/>
-            <Modal><IngredientDetails/></Modal>
-            {/*<AppMain />*/}
+            <AppMain />
         </div>
     );
 }
