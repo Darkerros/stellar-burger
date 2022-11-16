@@ -28,6 +28,10 @@ const NavigationItem = ({children,iconComponentName,active}) => {
     );
 };
 
-NavigationItem.PropsTypes = {children: PropTypes.string}
+NavigationItem.PropsTypes = {
+    children: PropTypes.string,
+    iconComponentName: PropTypes.oneOf(['BurgerIcon','ListIcon','ProfileIcon']),
+    active: PropTypes.bool
+}
 
 export default NavigationItem;

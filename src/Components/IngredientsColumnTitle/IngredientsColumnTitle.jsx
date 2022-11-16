@@ -1,7 +1,6 @@
-// @ts-ignore
 import React from 'react';
+import PropTypes from "prop-types";
 
-// @ts-ignore
 const IngredientsColumnTitle = ({children}) => {
     return (
         <p className={'text text_type_main-medium'}>
@@ -9,5 +8,7 @@ const IngredientsColumnTitle = ({children}) => {
         </p>
     );
 };
+
+IngredientsColumnTitle.propTypes = {children: PropTypes.string.isRequired}
 
 export default IngredientsColumnTitle;

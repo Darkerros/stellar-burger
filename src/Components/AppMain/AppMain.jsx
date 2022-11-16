@@ -31,7 +31,7 @@ const AppMain = () => {
         useEffect(() => {
             api.getrIngredients()
                 .then(ingredientsList => {
-                    setTimeout(() => setAllIngredients(ingredientsList.data),1000)
+                    setTimeout(() => setAllIngredients(ingredientsList.data), 1000)
                 })
                 .catch()
         }, [])
@@ -41,7 +41,7 @@ const AppMain = () => {
                 {type: 'bun', name: 'Булки', ingredientsList: []},
                 {type: "sauce", name: 'Соусы', ingredientsList: []},
                 {type: "main", name: 'Главное', ingredientsList: []}
-                ]
+            ]
             // @ts-ignore
             allIngredients.forEach(ingredient => groupIngredients.forEach(group => {
                 // @ts-ignore
@@ -66,7 +66,6 @@ const AppMain = () => {
         }, [cart])
 
         const cartPrice = useMemo(() => {
-            // @ts-ignore
             return cartItemList.length ? cartItemList.map(cartItem => cartItem.price).reduce((a, b) => a + b, 0) + bun.price : bun.price
         }, [cartItemList, bun])
 
@@ -87,6 +86,7 @@ const AppMain = () => {
 
         // @ts-ignore
         const getIngredientCount = (ingredientId) => ingredientsCounts[ingredientId]
+
         // @ts-ignore
         function addIngredientToCart(ingredient) {
             if (ingredient.type === 'bun') {
@@ -96,11 +96,12 @@ const AppMain = () => {
                 const cartNew = {}
                 // @ts-ignore
                 cartNew[key] = ingredient
-                setCart({...cart,...cartNew})
+                setCart({...cart, ...cartNew})
             }
         }
+
         // @ts-ignore
-        function deleteIngridientFromCart (cartItemId) {
+        function deleteIngridientFromCart(cartItemId) {
             const cartItems = {...cart}
             // @ts-ignore
             delete cartItems[cartItemId]
@@ -117,8 +118,7 @@ const AppMain = () => {
                 }
                 setCart(randomCart)
             }
-        },[allIngredients])
-
+        }, [allIngredients])
 
         return (
             allIngredients.length === 0
@@ -127,8 +127,7 @@ const AppMain = () => {
                 :
                 <main className={appMainStyles.AppMain}>
                     <BurgerIngredients getIngredientCountFn={getIngredientCount}
-                                       groupedIngredients={groupedIngredients}
-                                       addIngredientsToCartFn={addIngredientToCart}/>
+                                       groupedIngredients={groupedIngredients}/>
 
                     <BurgerConstructor cartItemsList={cartItemList}
                                        currentBun={bun}

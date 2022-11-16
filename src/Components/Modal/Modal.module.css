@@ -9,6 +9,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s linear;
 }
 
 .content{
@@ -27,4 +37,5 @@
     position: absolute;
     right: 40px;
     top: 54px;
+    cursor: pointer;
 }

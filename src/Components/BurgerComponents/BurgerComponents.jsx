@@ -15,7 +15,7 @@ const BurgerComponents = ({currentBun,cartItemsList,deleteIngridientFromCartFn})
                 {currentBun && <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false} type={'top'} handleClose={() => 1}/>}
             </div>
             <ul className={burgerComponentStyles.BurgerComponents__unlocked + " pr-2"}>
-                {cartItemsList && cartItemsList.map((ingredient: NonNullable<PropTypes.InferProps<{ calories: PropTypes.Validator<number>; carbohydrates: PropTypes.Validator<number>; fat: PropTypes.Validator<number>; image: PropTypes.Validator<string>; name: PropTypes.Validator<string>; price: PropTypes.Validator<number>; proteins: PropTypes.Validator<number>; type: PropTypes.Validator<string>; __v: PropTypes.Validator<number>; _id: PropTypes.Validator<string>; cartItemId: PropTypes.Requireable<string>; }>>) => <BurgerComponent cartIngredient={ingredient} key={ingredient.cartItemId} isLocked={false} dragAndDropEnabled={true} type={"centre"} handleClose={() => deleteIngridientFromCartFn(ingredient.cartItemId)}/>)}
+                {cartItemsList && cartItemsList.map((ingredient) => <BurgerComponent cartIngredient={ingredient} key={ingredient.cartItemId} isLocked={false} dragAndDropEnabled={true} type={"centre"} handleClose={() => deleteIngridientFromCartFn(ingredient.cartItemId)}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
                 {currentBun && <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false} type={'bottom'} handleClose={() => 1}/>}
