@@ -1,14 +1,12 @@
 import React from 'react';
-import './App.css';
+import appStyles from'./App.module.css';
 import AppHeader from "../AppHeader/AppHeader";
 import AppMain from "../AppMain/AppMain";
-import Modal from "../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import OrderDetails from "../OrderDetails/OrderDetails";
+
 
 function App() {
     return (
-        <div className="App">
+        <div className={appStyles.App}>
             <AppHeader/>
             <AppMain />
         </div>
