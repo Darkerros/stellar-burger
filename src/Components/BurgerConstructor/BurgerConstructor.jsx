@@ -2,10 +2,10 @@ import React from 'react';
 import burgerConstructorStyles from './BurgerConstructor.module.css'
 import BurgerComponents from "../BurgerComponents/BurgerComponents";
 import CartInfo from "../CartInfo/CartInfo";
+import ingredientType from "../../types/ingredientType";
 import cartItemType from "../../types/cartItemType";
 import PropTypes from "prop-types";
-import bunType from "../../types/bunType";
-import ingredientType from "../../types/ingredientType";
+
 
 const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartFn, cartPrice}) => {
     return (
@@ -22,9 +22,9 @@ const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartF
 
 BurgerConstructor.propTypes = {
     currentBun: ingredientType.isRequired,
-    cartItemsList: PropTypes.arrayOf(cartItemType),
+    cartItemsList: PropTypes.arrayOf(cartItemType.isRequired).isRequired,
     deleteIngridientFromCartFn: PropTypes.func.isRequired,
-    cartPrice: PropTypes.number,
+    cartPrice: PropTypes.number.isRequired
 }
 
 export default BurgerConstructor;

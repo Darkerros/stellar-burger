@@ -13,8 +13,9 @@ const Ingredient = ({ingredient, counter}) => {
 
     return (
         <li className={ingredientStyles.Ingredient} onClick={() => setIngredientModalState(true)}>
-            {counter && <Counter count={counter} extraClass={ingredientStyles.Ingredient__count}/>}
-            <img className={ingredientStyles.Ingredient__image + ' ml-4 mr-4'} src={ingredient.image}/>
+            {counter !== 0 && <Counter count={counter} extraClass={ingredientStyles.Ingredient__count}/>}
+            <img className={ingredientStyles.Ingredient__image + ' ml-4 mr-4'} src={ingredient.image}
+                 alt={ingredient.name ? ingredient.name : 'Картинка ингредиента'}/>
             <Price>{ingredient.price}</Price>
             <p className={ingredientStyles.Ingredient__name + " text text_type_main-default mt-1"}>{ingredient.name}</p>
             {ingredientModalState &&
@@ -28,7 +29,7 @@ const Ingredient = ({ingredient, counter}) => {
 
 Ingredient.propTypes = {
     ingredient: ingredientType.isRequired,
-    counter: PropTypes.number
+    counter: PropTypes.number.isRequired
 }
 
 export default Ingredient;

@@ -1,6 +1,9 @@
 import React from 'react';
 import IngredientsColumn from "../IngredientsColumn/IngredientsColumn";
 import ingredientsStyles from './Ingredients.module.css'
+import PropTypes from "prop-types";
+import ingredientGroupType from "../../types/ingredientGroupType";
+import tabInfoType from "../../types/tabInfoType";
 
 
 const Ingredients = ({groupedIngredients,getIngredientCountFn,tabInfoList,activeTab,handleSetActiveTab}) => {
@@ -24,5 +27,13 @@ const Ingredients = ({groupedIngredients,getIngredientCountFn,tabInfoList,active
         </ul>
     );
 };
+
+Ingredients.propTypes = {
+    groupedIngredients: PropTypes.arrayOf(ingredientGroupType.isRequired).isRequired,
+    getIngredientCountFn: PropTypes.func.isRequired,
+    tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired).isRequired,
+    activeTab: PropTypes.string.isRequired,
+    handleSetActiveTab: PropTypes.func.isRequired
+}
 
 export default Ingredients;

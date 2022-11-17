@@ -3,6 +3,7 @@ import burgerComponentStyles from './BurgerComponent.module.css'
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import cartItemType from "../../types/cartItemType";
+import ingredientType from "../../types/ingredientType";
 
 const BurgerComponent = ({dragAndDropEnabled, cartIngredient, isLocked, type, handleClose}) => {
     return (
@@ -16,11 +17,12 @@ const BurgerComponent = ({dragAndDropEnabled, cartIngredient, isLocked, type, ha
 };
 
 BurgerComponent.propTypes = {
-    cartIngredient: cartItemType.isRequired,
     dragAndDropEnabled: PropTypes.bool.isRequired,
+    cartIngredient: PropTypes.oneOfType([cartItemType, ingredientType]),
     isLocked: PropTypes.bool.isRequired,
-    type: PropTypes.oneOf(['top', 'bottom', "centre"]).isRequired,
-    handleClose: PropTypes.func.isRequired,
+    type: PropTypes.oneOf(['top', 'bottom', 'centre']).isRequired,
+    handleClose: PropTypes.func.isRequired
 }
 
 export default BurgerComponent;
+

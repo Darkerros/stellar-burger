@@ -13,7 +13,7 @@ const Tabs = ({className, tabInfoList,activeTab,setActiveTab}) => {
 
     return (
         <div className={className ? tabsStyles.Tabs + ' ' + className : tabsStyles.Tabs}>
-            {tabInfoList.map((tabInfo, index) =>
+            {tabInfoList.map((tabInfo) =>
                 <Tab active={activeTab === tabInfo.id}
                      value={tabInfo.id}
                      key={tabInfo.id}
@@ -27,7 +27,7 @@ const Tabs = ({className, tabInfoList,activeTab,setActiveTab}) => {
 
 Tabs.propTypes = {
     className: PropTypes.string,
-    tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired),
+    tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired).isRequired,
     activeTab: PropTypes.string.isRequired,
     setActiveTab: PropTypes.func.isRequired,
 }

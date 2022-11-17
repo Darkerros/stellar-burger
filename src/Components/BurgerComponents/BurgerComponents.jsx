@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import burgerComponentStyles from './BurgerComponents.module.css'
 import BurgerComponent from "../BurgerComponent/BurgerComponent";
+import ingredientType from "../../types/ingredientType";
 import PropTypes from "prop-types";
 import cartItemType from "../../types/cartItemType";
-import ingredientType from "../../types/ingredientType";
+
 
 const BurgerComponents = ({currentBun, cartItemsList, deleteIngridientFromCartFn}) => {
-    useEffect(() => {
-        console.log(cartItemsList)},[cartItemsList])
 
     return (
         <div className={burgerComponentStyles.BurgerComponents + " mt-25"}>
@@ -34,8 +33,9 @@ const BurgerComponents = ({currentBun, cartItemsList, deleteIngridientFromCartFn
 
 BurgerComponents.propTypes = {
     currentBun: ingredientType.isRequired,
-    cartItemsList: PropTypes.arrayOf(cartItemType).isRequired,
+    cartItemsList: PropTypes.arrayOf(cartItemType.isRequired).isRequired,
     deleteIngridientFromCartFn: PropTypes.func.isRequired,
 }
+
 
 export default BurgerComponents;

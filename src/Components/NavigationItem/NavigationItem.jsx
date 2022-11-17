@@ -28,9 +28,9 @@ const NavigationItem = ({children, iconComponentName, active}) => {
 };
 
 NavigationItem.PropsTypes = {
-    children: PropTypes.string,
-    iconComponentName: PropTypes.oneOf(['BurgerIcon', 'ListIcon', 'ProfileIcon']),
-    active: PropTypes.bool
+    children: PropTypes.string.string,
+    iconComponentName: PropTypes.oneOf(['BurgerIcon', 'ListIcon', 'ProfileIcon']).isRequired,
+    active: PropTypes.bool.isRequired
 }
 
 export default NavigationItem;

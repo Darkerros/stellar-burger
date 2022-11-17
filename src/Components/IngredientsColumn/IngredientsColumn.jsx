@@ -10,7 +10,7 @@ const IngredientsColumn = ({title, ingredients, getIngredientCountFn, id}) => {
         <IngredientsColumnTitle>{title}</IngredientsColumnTitle>
         <ul className={ingredientsColumnStyles.IngredientsColumn__content + ' mt-6'}>
             {ingredients.map((ingredientInfo) => <Ingredient key={ingredientInfo._id}
-                                                             counter={getIngredientCountFn(ingredientInfo._id) ? getIngredientCountFn(ingredientInfo._id) : undefined}
+                                                             counter={getIngredientCountFn(ingredientInfo._id) ? getIngredientCountFn(ingredientInfo._id) : 0}
                                                              ingredient={ingredientInfo}/>)}
         </ul>
     </li>)

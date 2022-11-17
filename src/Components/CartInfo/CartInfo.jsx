@@ -5,6 +5,7 @@ import cartInfoStyles from './CartInfo.module.css'
 import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
+
 const CartInfo = ({cartPrice}) => {
     const [orderModalState, setOrderModalState] = useState(false)
 
@@ -40,6 +41,6 @@ const CartInfo = ({cartPrice}) => {
     );
 };
 
-CartInfo.propTypes = {cartPrice: PropTypes.number}
+CartInfo.propTypes = {cartPrice: PropTypes.number.isRequired}
 
 export default CartInfo;

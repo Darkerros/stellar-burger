@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import ingredientType from "./ingredientType";
 
 const cartItemType = PropTypes.shape({
-    ...ingredientType,
-    cartItemId: PropTypes.string
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    cartItemId: PropTypes.string.isRequired
 })
 
 export default cartItemType;

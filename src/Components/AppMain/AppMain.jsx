@@ -27,10 +27,8 @@ const AppMain = () => {
 
         useEffect(() => {
             api.getrIngredients()
-                .then(ingredientsList => {
-                    setTimeout(() => setAllIngredients(ingredientsList.data), 1000)
-                })
-                .catch()
+                .then(ingredientsList => setAllIngredients(ingredientsList.data))
+                .catch(error => alert(error.message))
         }, [])
 
         const groupedIngredients = useMemo(() => {
@@ -73,6 +71,7 @@ const AppMain = () => {
 
         const getIngredientCount = (ingredientId) => ingredientsCounts[ingredientId]
 
+        // eslint-disable-next-line
         function addIngredientToCart(ingredient) {
             if (ingredient.type === 'bun') {
                 setBun(ingredient)
@@ -99,6 +98,7 @@ const AppMain = () => {
                 }
                 setCart(randomCart)
             }
+            // eslint-disable-next-line
         }, [allIngredients])
 
         return (

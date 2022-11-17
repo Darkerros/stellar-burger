@@ -12,6 +12,6 @@ const Price = ({children}) => {
     );
 };
 
-Price.propTypes = {children: PropTypes.number}
+Price.propTypes = {children: PropTypes.number.isRequired}
 
 export default Price;
