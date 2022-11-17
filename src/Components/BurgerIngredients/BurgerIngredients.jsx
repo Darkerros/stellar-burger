@@ -7,11 +7,8 @@ import PropTypes from "prop-types";
 import {useMemo, useState} from "react";
 import ingredientGroupType from "../../types/ingredientGroupType";
 
-// @ts-ignore
 const BurgerIngredients = ({groupedIngredients,getIngredientCountFn}) => {
-    // @ts-ignore
     const tabInfoList = useMemo(() => groupedIngredients.map(group => ({name: group.name, id: group.type})),[groupedIngredients])
-    // @ts-ignore
     const [activeTab,setActiveTab] = useState(tabInfoList[0].id)
 
     return (

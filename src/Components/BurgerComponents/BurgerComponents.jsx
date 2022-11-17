@@ -5,20 +5,26 @@ import bunType from "../../types/bunType";
 import PropTypes from "prop-types";
 import cartItemType from "../../types/cartItemType";
 
-// @ts-ignore
-const BurgerComponents = ({currentBun,cartItemsList,deleteIngridientFromCartFn}) => {
+const BurgerComponents = ({currentBun, cartItemsList, deleteIngridientFromCartFn}) => {
 
-    // @ts-ignore
     return (
         <div className={burgerComponentStyles.BurgerComponents + " mt-25"}>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                {currentBun && <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false} type={'top'} handleClose={() => 1}/>}
+                {currentBun &&
+                    <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false} type={'top'}
+                                     handleClose={() => 1}/>}
             </div>
             <ul className={burgerComponentStyles.BurgerComponents__unlocked + " pr-2"}>
-                {cartItemsList && cartItemsList.map((ingredient) => <BurgerComponent cartIngredient={ingredient} key={ingredient.cartItemId} isLocked={false} dragAndDropEnabled={true} type={"centre"} handleClose={() => deleteIngridientFromCartFn(ingredient.cartItemId)}/>)}
+                {cartItemsList && cartItemsList.map((ingredient) => <BurgerComponent cartIngredient={ingredient}
+                                                                                     key={ingredient.cartItemId}
+                                                                                     isLocked={false}
+                                                                                     dragAndDropEnabled={true}
+                                                                                     type={"centre"}
+                                                                                     handleClose={() => deleteIngridientFromCartFn(ingredient.cartItemId)}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                {currentBun && <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false} type={'bottom'} handleClose={() => 1}/>}
+                {currentBun && <BurgerComponent cartIngredient={currentBun} isLocked={true} dragAndDropEnabled={false}
+                                                type={'bottom'} handleClose={() => 1}/>}
             </div>
         </div>
     );

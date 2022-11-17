@@ -11,7 +11,7 @@ const Price = ({children}) => {
         </span>
     );
 };
-// eslint-disable-next-line react/no-typos
+
 Price.propTypes = {children: PropTypes.number}
 
 export default Price;

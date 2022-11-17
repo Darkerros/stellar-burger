@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-// @ts-ignore
 const Title = ({children}) => {
     return (
         <p className={'text text_type_main-large mt-10'}>

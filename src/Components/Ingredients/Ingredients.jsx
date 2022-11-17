@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import IngredientsColumn from "../IngredientsColumn/IngredientsColumn";
 import ingredientsStyles from './Ingredients.module.css'
-import groupedIngredientsType from "../../types/ingredientGroupType";
-import PropTypes from "prop-types";
-// @ts-ignore
+
+
 const Ingredients = ({groupedIngredients,getIngredientCountFn,tabInfoList,activeTab,handleSetActiveTab}) => {
     const handleScroll = (evt) => {
-        const startPos = evt.target.offsetTop * 1
+        const startPos = evt.target.offsetTop
         const activeTabs = tabInfoList.map(tab => {
             const currentPos = document.querySelector('#'+tab.id).getBoundingClientRect().top
             if (startPos >= currentPos) {
                 return tab.id
             }
+            return undefined
         }).filter(tabId => tabId !== undefined)
         if (activeTabs.length !== 0 && activeTabs[activeTabs.length-1] !== activeTab){
             handleSetActiveTab(activeTabs[activeTabs.length-1])

@@ -6,12 +6,12 @@ import cartItemType from "../../types/cartItemType";
 import PropTypes from "prop-types";
 import bunType from "../../types/bunType";
 
-// @ts-ignore
-const BurgerConstructor = ({currentBun,cartItemsList,deleteIngridientFromCartFn,cartPrice}) => {
+const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartFn, cartPrice}) => {
     return (
         <section className={burgerConstructorStyles.BurgerConstructor + " pl-10"}>
-            <div className={burgerConstructorStyles.BurgerConstructor_content +" pl-4"}>
-                <BurgerComponents currentBun={currentBun} cartItemsList={cartItemsList} deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
+            <div className={burgerConstructorStyles.BurgerConstructor_content + " pl-4"}>
+                <BurgerComponents currentBun={currentBun} cartItemsList={cartItemsList}
+                                  deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
                 <CartInfo cartPrice={cartPrice}/>
             </div>
         </section>

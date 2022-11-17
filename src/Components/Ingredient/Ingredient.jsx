@@ -5,11 +5,10 @@ import Price from "../Price/Price";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
-import CartInfo from "../CartInfo/CartInfo";
 import ingredientType from "../../types/ingredientType";
-// @ts-ignore
-const Ingredient = ({ingredient,counter}) => {
-    const [ingredientModalState,setIngredientModalState] = useState(false)
+
+const Ingredient = ({ingredient, counter}) => {
+    const [ingredientModalState, setIngredientModalState] = useState(false)
     const closeIngredientModal = () => setIngredientModalState(false)
 
     return (
