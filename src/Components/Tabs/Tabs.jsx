@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import tabsStyles from "./Tabs.module.css"
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
@@ -6,17 +6,14 @@ import tabInfoType from "../../types/tabInfoType";
 
 // @ts-ignore
 const Tabs = ({className, tabInfoList,activeTab,setActiveTab}) => {
-    // @ts-ignore
     const setActiveTabAndScroll = (id) => {
         setActiveTab(id)
-        // @ts-ignore
         document.querySelector('#'+id).scrollIntoView({ behavior: "smooth" })
     }
 
-    // @ts-ignore
     return (
         <div className={className ? tabsStyles.Tabs + ' ' + className : tabsStyles.Tabs}>
-            {tabInfoList.map((tabInfo, index) =>
+            {tabInfoList.map((tabInfo) =>
                 <Tab active={activeTab === tabInfo.id}
                      value={tabInfo.id}
                      key={tabInfo.id}
@@ -30,7 +27,7 @@ const Tabs = ({className, tabInfoList,activeTab,setActiveTab}) => {
 
 Tabs.propTypes = {
     className: PropTypes.string,
-    tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired),
+    tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired).isRequired,
     activeTab: PropTypes.string.isRequired,
     setActiveTab: PropTypes.func.isRequired,
 }
