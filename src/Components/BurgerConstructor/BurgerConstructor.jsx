@@ -5,12 +5,14 @@ import CartInfo from "../CartInfo/CartInfo";
 import cartItemType from "../../types/cartItemType";
 import PropTypes from "prop-types";
 import bunType from "../../types/bunType";
+import ingredientType from "../../types/ingredientType";
 
 const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartFn, cartPrice}) => {
     return (
         <section className={burgerConstructorStyles.BurgerConstructor + " pl-10"}>
             <div className={burgerConstructorStyles.BurgerConstructor_content + " pl-4"}>
-                <BurgerComponents currentBun={currentBun} cartItemsList={cartItemsList}
+                <BurgerComponents currentBun={currentBun}
+                                  cartItemsList={cartItemsList}
                                   deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
                 <CartInfo cartPrice={cartPrice}/>
             </div>
@@ -19,7 +21,7 @@ const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartF
 };
 
 BurgerConstructor.propTypes = {
-    currentBun: bunType.isRequired,
+    currentBun: ingredientType.isRequired,
     cartItemsList: PropTypes.arrayOf(cartItemType),
     deleteIngridientFromCartFn: PropTypes.func.isRequired,
     cartPrice: PropTypes.number,

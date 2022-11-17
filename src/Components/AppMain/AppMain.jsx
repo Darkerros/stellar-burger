@@ -34,18 +34,21 @@ const AppMain = () => {
         }, [])
 
         const groupedIngredients = useMemo(() => {
+
             const groupIngredients = [
                 {type: 'bun', name: 'Булки', ingredientsList: []},
                 {type: "sauce", name: 'Соусы', ingredientsList: []},
                 {type: "main", name: 'Главное', ingredientsList: []}
             ]
-            allIngredients.forEach(ingredient => groupIngredients.forEach(group => {
-                if (ingredient.type === group.type) {
-                    group.ingredientsList.push(ingredient)
+            if (allIngredients.length){
+                allIngredients.forEach(ingredient => groupIngredients.forEach(group => {
+                    if (ingredient.type === group.type) {
+                        group.ingredientsList.push(ingredient)
+                    }
+                }))
+                if (groupIngredients[0].ingredientsList[0]) {
+                    setBun(groupIngredients[0].ingredientsList[0])
                 }
-            }))
-            if (groupIngredients[0].ingredientsList[0]) {
-                setBun(groupIngredients[0].ingredientsList[0])
             }
             return groupIngredients
         }, [allIngredients])
@@ -56,9 +59,7 @@ const AppMain = () => {
             return cartItems
         }, [cart])
 
-        const cartPrice = useMemo(() => {
-            return cartItemList.length ? cartItemList.map(cartItem => cartItem.price).reduce((a, b) => a + b, 0) + bun.price : bun.price
-        }, [cartItemList, bun])
+        const cartPrice = useMemo(() => cartItemList.length ? cartItemList.map(cartItem => cartItem.price).reduce((a, b) => a + b, 0) + bun.price : bun.price, [cartItemList, bun])
 
         const ingredientsCounts = useMemo(() => {
             const ingredientsCount = {}
@@ -110,9 +111,9 @@ const AppMain = () => {
                                        groupedIngredients={groupedIngredients}/>
 
                     <BurgerConstructor cartItemsList={cartItemList}
-                                       currentBun={bun}
-                                       deleteIngridientFromCartFn={deleteIngridientFromCart}
-                                       cartPrice={cartPrice}/>
+                                        currentBun={bun}
+                                        deleteIngridientFromCartFn={deleteIngridientFromCart}
+                                        cartPrice={cartPrice}/>
                 </main>
         );
     }
