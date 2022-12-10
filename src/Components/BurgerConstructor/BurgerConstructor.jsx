@@ -1,30 +1,27 @@
-import React from 'react';
+import React, {useContext, useMemo} from 'react';
 import burgerConstructorStyles from './BurgerConstructor.module.css'
 import BurgerComponents from "../BurgerComponents/BurgerComponents";
 import CartInfo from "../CartInfo/CartInfo";
-import ingredientType from "../../types/ingredientType";
-import cartItemType from "../../types/cartItemType";
-import PropTypes from "prop-types";
+import CartContext from "../../context/CartContext";
 
 
-const BurgerConstructor = ({currentBun, cartItemsList, deleteIngridientFromCartFn, cartPrice}) => {
+const BurgerConstructor = () => {
+    const {cart} = useContext(CartContext)
+    const cartPrice = useMemo(() => {
+        const bunPrice = cart.bun ? cart.bun.price * 2 : 0
+        const ingredientPrice = cart.items.reduce((a,b) => a + b.price,0)
+        return bunPrice + ingredientPrice
+    }, [cart])
+
     return (
         <section className={burgerConstructorStyles.BurgerConstructor + " pl-10"}>
             <div className={burgerConstructorStyles.BurgerConstructor_content + " pl-4"}>
-                <BurgerComponents currentBun={currentBun}
-                                  cartItemsList={cartItemsList}
-                                  deleteIngridientFromCartFn={deleteIngridientFromCartFn}/>
+                <BurgerComponents />
                 <CartInfo cartPrice={cartPrice}/>
             </div>
         </section>
     );
 };
 
-BurgerConstructor.propTypes = {
-    currentBun: ingredientType.isRequired,
-    cartItemsList: PropTypes.arrayOf(cartItemType.isRequired).isRequired,
-    deleteIngridientFromCartFn: PropTypes.func.isRequired,
-    cartPrice: PropTypes.number.isRequired
-}
 
 export default BurgerConstructor;
