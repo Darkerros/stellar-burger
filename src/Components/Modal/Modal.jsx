@@ -15,8 +15,6 @@ const Modal = ({children,handleClose}) => {
         setTimeout(() => handleClose(),300)
     }
 
-
-
     useEffect(() => {
         function closeByEsc (evt) {
             if (evt.key === "Escape") {
