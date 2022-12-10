@@ -8,11 +8,11 @@ const ORDER_FAIL = "ORDER_FAIL"
 const orderReducer = (state = defaultState,action) => {
     switch (action.type){
         case ORDER_LOADING:
-            return {isLoading: true, isFail: false, isSucess: false, order: null}
+            return {isLoading: true, isFail: false, isSuccess: false, order: null}
         case ORDER_GET:
-            return {isLoading: false, isFail: false, isSucess: true, order: action.payload}
+            return {isLoading: false, isFail: false, isSuccess: true, order: action.payload}
         case ORDER_FAIL:
-            return {isLoading: false, isFail: true, isSucess: false, order: null}
+            return {isLoading: false, isFail: true, isSuccess: false, order: null}
         default:
             return state
     }
