@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import IngredientsColumn from "../IngredientsColumn/IngredientsColumn";
 import ingredientsStyles from './Ingredients.module.css'
 import PropTypes from "prop-types";
-import ingredientGroupType from "../../types/ingredientGroupType";
 import tabInfoType from "../../types/tabInfoType";
+import IngredientsContext from "../../context/IngredientsContext";
 
 
-const Ingredients = ({groupedIngredients,getIngredientCountFn,tabInfoList,activeTab,handleSetActiveTab}) => {
+const Ingredients = ({tabInfoList,activeTab,handleSetActiveTab}) => {
+    const {groupedIngredients} = useContext(IngredientsContext)
     const handleScroll = (evt) => {
         const startPos = evt.target.offsetTop
         const activeTabs = tabInfoList.map(tab => {
@@ -20,17 +21,16 @@ const Ingredients = ({groupedIngredients,getIngredientCountFn,tabInfoList,active
             handleSetActiveTab(activeTabs[activeTabs.length-1])
         }
     }
+
     return (
         <ul className={ingredientsStyles.Ingredients + ' mt-10 mb-10'} onScroll={handleScroll}>
             {groupedIngredients.map((group,index) =>
-                <IngredientsColumn getIngredientCountFn={getIngredientCountFn} id={tabInfoList[index].id} key={tabInfoList[index].id} ingredients={group.ingredientsList} title={group.name}/>)}
+                <IngredientsColumn id={tabInfoList[index].id} key={tabInfoList[index].id} ingredients={group.ingredientsList} title={group.name}/>)}
         </ul>
     );
 };
 
 Ingredients.propTypes = {
-    groupedIngredients: PropTypes.arrayOf(ingredientGroupType.isRequired).isRequired,
-    getIngredientCountFn: PropTypes.func.isRequired,
     tabInfoList: PropTypes.arrayOf(tabInfoType.isRequired).isRequired,
     activeTab: PropTypes.string.isRequired,
     handleSetActiveTab: PropTypes.func.isRequired
