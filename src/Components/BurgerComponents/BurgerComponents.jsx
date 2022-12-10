@@ -9,11 +9,16 @@ const BurgerComponents = () => {
     const {cart,cartDispatch} = useContext(CartContext)
     const deleteCartItem = (cartId) => cartDispatch(deleteCartItemAction(cartId))
 
+    const setNamePos = (position,ingredient) => {
+        const pos = position === "top" ? " (верх)" : " (низ)"
+        return {...ingredient,name: ingredient.name + pos}
+    }
+
     return (
         <div className={burgerComponentStyles.BurgerComponents + " mt-25"}>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
                 {cart.bun &&
-                    <BurgerComponent cartIngredient={cart.bun}
+                    <BurgerComponent cartIngredient={setNamePos("top",cart.bun)}
                                      isLocked={true}
                                      dragAndDropEnabled={false}
                                      type={'top'}
@@ -30,7 +35,7 @@ const BurgerComponents = () => {
                                          handleClose={() => deleteCartItem(ingredient.cartId)}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                {cart.bun && <BurgerComponent cartIngredient={cart.bun}
+                {cart.bun && <BurgerComponent cartIngredient={setNamePos("bottom",cart.bun)}
                                               isLocked={true}
                                               dragAndDropEnabled={false}
                                               type={'bottom'}
