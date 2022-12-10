@@ -4,14 +4,14 @@ const ADD_CART_ITEM = "ADD_CART__ITEM"
 const DELETE_CART_ITEM = "DELETE_CART_ITEM"
 const SET_BUN = "SET_BUN"
 
-const defaultState = {items : [],bun: undefined}
+const defaultState = {items : [],bun: null}
 
 const cartReducer = (state = defaultState,action) => {
     switch (action.type) {
         case SET_CART:
             return {...state,items: action.payload}
         case ADD_CART_ITEM:
-            return {...state,items: [...state.items,action.payload]}
+            return {...state,items: [...state.items, {cartId: Date.now(), ...action.payload}]}
         case DELETE_CART_ITEM:
             return {...state,items: state.items.filter(item => item.cartId !== action.payload)}
         case SET_BUN:
