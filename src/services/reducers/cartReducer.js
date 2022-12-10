@@ -4,9 +4,9 @@ const ADD_CART_ITEM = "ADD_CART__ITEM"
 const DELETE_CART_ITEM = "DELETE_CART_ITEM"
 const SET_BUN = "SET_BUN"
 
-//const defaultState = {items : [],bun: undefined}
+const defaultState = {items : [],bun: undefined}
 
-const cartReducer = (state ,action) => {
+const cartReducer = (state = defaultState,action) => {
     switch (action.type) {
         case SET_CART:
             return {...state,items: action.payload}
