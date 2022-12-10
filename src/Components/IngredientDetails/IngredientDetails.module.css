@@ -1,0 +1,40 @@
+.ingredientDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    max-width: 580px;
+    overflow: hidden;
+}
+
+.image {
+    width: 480px;
+    height: 240px;
+    margin: 0 auto;
+}
+
+.name {
+    align-self: center;
+    max-width: 520px;
+    text-align: center;
+}
+
+.info {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+
+.infoItem {
+    min-width: 110px;
+}
+
+.infoItemTitle {
+    text-align: center;
+}
+
+.infoItemText {
+text-align: center;
+}

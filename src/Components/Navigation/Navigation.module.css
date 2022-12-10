@@ -1,0 +1,8 @@
+.Navigation{
+    display: flex;
+    gap: 8px;
+}
+.Navigation__logo{
+    margin-left: 104px;
+    margin-right: 280px;
+}
