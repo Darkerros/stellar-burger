@@ -9,7 +9,7 @@ import bunIcon from '../../images/icons/bun-icon.png'
 import choseBunType from "../../types/choseBunType";
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch} from "react-redux";
-import {sortCartAction} from "../../services/reducers/cartReducer";
+import {sortCartAction} from "../../services/actions/cartActions";
 
 const BurgerComponent = ({dragAndDropEnabled, cartIngredient, isLocked, type, handleClose,index}) => {
     const dispatch = useDispatch()

@@ -6,10 +6,10 @@ import AppMain from "../AppMain/AppMain";
 
 function App() {
     return (
-    <div className={appStyles.App}>
-                <AppHeader/>
-                <AppMain/>
-            </div>
+        <div className={appStyles.App}>
+            <AppHeader/>
+            <AppMain/>
+        </div>
     );
 }
 

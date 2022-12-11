@@ -1,9 +1,9 @@
 import React from 'react';
 import burgerComponentStyles from './BurgerComponents.module.css'
 import BurgerComponent from "../BurgerComponent/BurgerComponent";
-import {addCartItemAction, deleteCartItemAction, setBunAction} from "../../services/reducers/cartReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
+import {addCartItemAction, deleteCartItemAction, setBunAction} from "../../services/actions/cartActions";
 
 
 const BurgerComponents = () => {
