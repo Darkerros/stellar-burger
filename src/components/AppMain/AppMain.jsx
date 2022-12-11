@@ -4,6 +4,8 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import api from "../../api/api";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Loading from "../Loading/Loading";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import {
     ingredientsLoadAction,
@@ -31,8 +33,10 @@ const AppMain = () => {
             <Loading/>
         :
             <main className={appMainStyles.AppMain} >
-                <BurgerIngredients/>
-                <BurgerConstructor/>
+                <DndProvider backend={HTML5Backend}>
+                    <BurgerIngredients/>
+                    <BurgerConstructor/>
+                </DndProvider>
             </main>
     );
     }
