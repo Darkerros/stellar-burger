@@ -1,17 +1,19 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import moneyIcon from '../../images/icons/money-icon.png'
 import cartInfoStyles from './CartInfo.module.css'
 import PropTypes from "prop-types";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import CartContext from "../../context/CartContext";
 import api from "../../api/api";
+import {orderGetAction, orderLoadingAction, orderLoadingFailAction} from "../../services/reducers/orderReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 const CartInfo = ({cartPrice}) => {
     const [orderModalState, setOrderModalState] = useState(false)
-    const {orderId,setOrderId} = useContext(CartContext)
-    const {cart} = useContext(CartContext)
+    const order = useSelector(state => state.orderReducer)
+    const dispatch = useDispatch()
+    const cart = useSelector(state => state.cartReducer)
     const handleCloseOrderModal = () => {
         setOrderModalState(false)
     }
@@ -20,9 +22,17 @@ const CartInfo = ({cartPrice}) => {
         setOrderModalState(true)
     }
 
-    const createOrder = () => {
-        const cartItemId = [cart.bun._id,...cart.items.map(item => item._id)]
-        api.createOrder(cartItemId).then(data => setOrderId(data.order.number)).then(() => handleOpenOrderModal())
+    const createOrder = () => (dispatch) => {
+        const cartItemId = cart.bun ? [cart.bun._id,...cart.items.map(item => item._id)] : []
+        dispatch(orderLoadingAction())
+        api.createOrder(cartItemId)
+            .then(data => dispatch(orderGetAction(data.order)))
+            .then(() => handleOpenOrderModal())
+            .catch((error) => dispatch(orderLoadingFailAction(error)))
+    }
+
+    const handleCreateOrder = ()  => {
+        dispatch(createOrder())
     }
 
 
@@ -36,13 +46,13 @@ const CartInfo = ({cartPrice}) => {
                 type="primary"
                 size="large"
                 htmlType={'button'}
-                onClick={createOrder}
+                onClick={handleCreateOrder}
             >
                 Оформить заказ
             </Button>
             {orderModalState &&
                 <Modal handleClose={handleCloseOrderModal}>
-                    <OrderDetails orderId={orderId}/>
+                    <OrderDetails orderId={order.order.orderId}/>
                 </Modal>
             }
         </div>

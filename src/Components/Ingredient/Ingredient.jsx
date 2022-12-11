@@ -11,6 +11,7 @@ const Ingredient = ({ingredient, counter}) => {
     const [ingredientModalState, setIngredientModalState] = useState(false)
     const closeIngredientModal = () => setIngredientModalState(false)
 
+
     return (
         <li className={ingredientStyles.Ingredient} onClick={() => setIngredientModalState(true)}>
             {counter !== 0 && <Counter count={counter} extraClass={ingredientStyles.Ingredient__count}/>}

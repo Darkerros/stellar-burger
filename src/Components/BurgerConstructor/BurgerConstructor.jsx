@@ -1,12 +1,12 @@
-import React, {useContext, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import burgerConstructorStyles from './BurgerConstructor.module.css'
 import BurgerComponents from "../BurgerComponents/BurgerComponents";
 import CartInfo from "../CartInfo/CartInfo";
-import CartContext from "../../context/CartContext";
+import {useSelector} from "react-redux";
 
 
 const BurgerConstructor = () => {
-    const {cart} = useContext(CartContext)
+    const cart = useSelector(state => state.cartReducer)
     const cartPrice = useMemo(() => {
         const bunPrice = cart.bun ? cart.bun.price * 2 : 0
         const ingredientPrice = cart.items.reduce((a,b) => a + b.price,0)

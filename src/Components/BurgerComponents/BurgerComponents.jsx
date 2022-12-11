@@ -1,13 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import burgerComponentStyles from './BurgerComponents.module.css'
 import BurgerComponent from "../BurgerComponent/BurgerComponent";
-import CartContext from "../../context/CartContext";
 import {deleteCartItemAction} from "../../services/reducers/cartReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const BurgerComponents = () => {
-    const {cart,cartDispatch} = useContext(CartContext)
-    const deleteCartItem = (cartId) => cartDispatch(deleteCartItemAction(cartId))
+    const cart = useSelector(state => state.cartReducer)
+    const dispatch = useDispatch()
+    const deleteCartItem = (cartId) => dispatch(deleteCartItemAction(cartId))
 
     const setNamePos = (position,ingredient) => {
         const pos = position === "top" ? " (верх)" : " (низ)"
@@ -17,12 +18,11 @@ const BurgerComponents = () => {
     return (
         <div className={burgerComponentStyles.BurgerComponents + " mt-25"}>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                {cart.bun &&
-                    <BurgerComponent cartIngredient={setNamePos("top",cart.bun)}
-                                     isLocked={true}
-                                     dragAndDropEnabled={false}
-                                     type={'top'}
-                                     handleClose={() => 1}/>}
+                <BurgerComponent cartIngredient={cart.bun ? setNamePos("top",cart.bun) : ({name: "Выберите булку",price: 0})}
+                                 isLocked={true}
+                                 dragAndDropEnabled={false}
+                                 type={'top'}
+                                 handleClose={() => 1}/>
             </div>
             <ul className={burgerComponentStyles.BurgerComponents__unlocked + " pr-2"}>
                 {cart.items &&
@@ -35,11 +35,11 @@ const BurgerComponents = () => {
                                          handleClose={() => deleteCartItem(ingredient.cartId)}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                {cart.bun && <BurgerComponent cartIngredient={setNamePos("bottom",cart.bun)}
-                                              isLocked={true}
-                                              dragAndDropEnabled={false}
-                                              type={'bottom'}
-                                              handleClose={() => 1}/>}
+                <BurgerComponent cartIngredient={cart.bun ? setNamePos("bottom",cart.bun) : ({name: "Выберите булку",price: 0})}
+                                 isLocked={true}
+                                 dragAndDropEnabled={false}
+                                 type={'bottom'}
+                                 handleClose={() => 1}/>
             </div>
         </div>
     );
