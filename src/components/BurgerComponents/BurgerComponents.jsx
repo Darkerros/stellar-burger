@@ -42,13 +42,13 @@ const BurgerComponents = () => {
             </div>
             <ul className={burgerComponentStyles.BurgerComponents__unlocked + " pr-2"}>
                 {cart.items &&
-                    cart.items.map((ingredient) =>
+                    cart.items.map((ingredient,index) =>
                         <BurgerComponent cartIngredient={ingredient}
                                          key={ingredient.cartId}
                                          isLocked={false}
                                          dragAndDropEnabled={true}
                                          type={"centre"}
-                                         handleClose={() => deleteCartItem(ingredient.cartId)}/>)}
+                                         handleClose={() => deleteCartItem(ingredient.cartId)} index={index}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
                 <BurgerComponent cartIngredient={cart.bun ? setNamePos("bottom",cart.bun) : ({name: "Выберите булку",price: 0})}
