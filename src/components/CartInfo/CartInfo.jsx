@@ -8,6 +8,7 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import api from "../../api/api";
 import {orderGetAction, orderLoadingAction, orderLoadingFailAction} from "../../services/reducers/orderReducer";
 import {useDispatch, useSelector} from "react-redux";
+import {setBunAction, setCartAction} from "../../services/reducers/cartReducer";
 
 const CartInfo = ({cartPrice}) => {
     const [orderModalState, setOrderModalState] = useState(false)
@@ -26,7 +27,11 @@ const CartInfo = ({cartPrice}) => {
         const cartItemId = cart.bun ? [cart.bun._id,...cart.items.map(item => item._id)] : []
         dispatch(orderLoadingAction())
         api.createOrder(cartItemId)
-            .then(data => dispatch(orderGetAction(data.order)))
+            .then(data => {
+                dispatch(orderGetAction(data.order))
+                dispatch(setBunAction(null))
+                dispatch(setCartAction([]))
+            })
             .then(() => handleOpenOrderModal())
             .catch((error) => dispatch(orderLoadingFailAction(error)))
     }
@@ -52,7 +57,7 @@ const CartInfo = ({cartPrice}) => {
             </Button>
             {orderModalState &&
                 <Modal handleClose={handleCloseOrderModal}>
-                    <OrderDetails orderId={order.order.orderId}/>
+                    <OrderDetails orderId={order.order.number}/>
                 </Modal>
             }
         </div>
