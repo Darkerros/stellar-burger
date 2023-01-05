@@ -6,13 +6,19 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
 import ingredientType from "../../types/ingredientType";
+import {useDrag} from "react-dnd";
 
 const Ingredient = ({ingredient, counter}) => {
     const [ingredientModalState, setIngredientModalState] = useState(false)
     const closeIngredientModal = () => setIngredientModalState(false)
 
+    const [,dragRef] = useDrag({
+        type: 'ingredient',
+        item: ingredient,
+    })
+
     return (
-        <li className={ingredientStyles.Ingredient} onClick={() => setIngredientModalState(true)}>
+        <li className={ingredientStyles.Ingredient} onClick={() => setIngredientModalState(true)} ref={dragRef}>
             {counter !== 0 && <Counter count={counter} extraClass={ingredientStyles.Ingredient__count}/>}
             <img className={ingredientStyles.Ingredient__image + ' ml-4 mr-4'} src={ingredient.image}
                  alt={ingredient.name ? ingredient.name : 'Картинка ингредиента'}/>
