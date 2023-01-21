@@ -15,3 +15,8 @@
     cursor: pointer;
     color: #4C4CFF;
 }
+
+.additionalLine {
+    display: flex;
+    gap: 8px;
+}
