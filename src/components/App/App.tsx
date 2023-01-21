@@ -1,12 +1,11 @@
 import appStyles from './App.module.css';
-import RegisterPage from "../../pages/RegisterPage/RegisterPage";
-import LoginPage from "../../pages/LoginPage/LoginPage";
+import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
 
 
 function App() {
     return (
         <div className={appStyles.App}>
-            <RegisterPage/>
+            <ResetPasswordPage/>
         </div>
     );
 }
