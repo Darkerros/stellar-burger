@@ -1,14 +1,12 @@
-import React from 'react';
 import appStyles from './App.module.css';
-import AppHeader from "../AppHeader/AppHeader";
-import AppMain from "../AppMain/AppMain";
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 
 
 function App() {
     return (
         <div className={appStyles.App}>
-            <AppHeader/>
-            <AppMain/>
+            <RegisterPage/>
         </div>
     );
 }
