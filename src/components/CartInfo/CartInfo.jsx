@@ -8,7 +8,7 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import {useDispatch, useSelector} from "react-redux";
 import {createOrderThunk} from "../../services/actions/createOrderThunk";
 import useAuth from "../../hooks/useAuth";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const CartInfo = ({cartPrice}) => {
     const [orderModalState, setOrderModalState] = useState(false)
