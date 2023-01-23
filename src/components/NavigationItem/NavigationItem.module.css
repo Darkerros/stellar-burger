@@ -1,5 +1,13 @@
 .NavigationItem{
+    cursor: pointer;
     display: flex;
-    border: 1px dashed #4C4CFF;
     border-radius: 40px;
+    box-sizing: content-box;
+
+    transition: all .3s linear
+}
+
+.NavigationItem:hover {
+    outline: 1px dashed #4C4CFF;
+    transition: all .3s linear
 }
