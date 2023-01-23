@@ -10,6 +10,7 @@ import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPag
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import {useDispatch} from "react-redux";
 import {setUserAction} from "../../services/actions/userAction";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         {path: "/register", element: <RegisterPage/>},
         {path: "/reset", element: <ResetPasswordPage/>},
         {path: "/forgot", element: <ForgotPasswordPage/>},
+        {path: "/profile", element: <ProfilePage/>},
         {path: "*", element: <MainPage/>}
     ])
 
