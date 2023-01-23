@@ -8,18 +8,24 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
+import {useDispatch} from "react-redux";
+import {setUserAction} from "../../services/actions/userAction";
 
 
 function App() {
+    const dispatch = useDispatch()
     const {getToken} = useTokenStorage()
 
     useEffect(() => {
 
         Api.getUser(getToken())
-            .then(date => console.log(date))
+            .then(date => {
+                const {user} = date
+                dispatch(setUserAction(user))
+            })
             .catch(err => console.log("Авторизация не удалась"))
 
-    },[getToken])
+    },[dispatch,getToken])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
