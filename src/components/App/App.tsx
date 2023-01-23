@@ -13,13 +13,13 @@ import LoginPage from "../../pages/LoginPage/LoginPage";
 function App() {
     const {getToken} = useTokenStorage()
 
-
     useEffect(() => {
+
         Api.getUser(getToken())
             .then(date => console.log(date))
             .catch(err => console.log("Авторизация не удалась"))
 
-    },[])
+    },[getToken])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
