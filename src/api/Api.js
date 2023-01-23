@@ -22,8 +22,8 @@ class Api {
     createOrder = (ingredientsList) => this.createRequest(`${this.baseUrl}/api/orders`,"POST",{ingredients: ingredientsList})
     registrateUser = (name,email,password) => this.createRequest(`${this.baseUrl}/api/auth/register`,"POST",{name, password, email})
     login = (email,password) => this.createRequest(`${this.baseUrl}/api/auth/login`,"POST",{password, email})
-    updateToken = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/token`,"POST",{refreshToken})
-    logout = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/logout`,"POST",{refreshToken})
+    updateToken = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/token`,"POST",{token: refreshToken})
+    logout = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/logout`,"POST",{token: refreshToken})
 
     getUser = (token) => this.createRequest(`${this.baseUrl}/api/auth/user`,"GET",null,token)
 

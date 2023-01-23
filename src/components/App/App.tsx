@@ -14,7 +14,7 @@ import {setUserAction} from "../../services/actions/userAction";
 
 function App() {
     const dispatch = useDispatch()
-    const {getToken,getRefreshToken,setToken} = useTokenStorage()
+    const {getToken,getRefreshToken,setToken,setRefreshToken} = useTokenStorage()
 
     useEffect(() => {
         Api.getUser(getToken())
@@ -28,6 +28,7 @@ function App() {
                     Api.updateToken(refreshToken)
                         .then(data => {
                             setToken(data.accessToken)
+                            setRefreshToken(data.refreshToken)
                         })
                 }
             })
