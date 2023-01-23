@@ -1,12 +1,10 @@
+import {LOGOUT_USER, SET_USER} from "../actions/userAction";
 
 const defaultState = {
     name : null,
     email: null
 }
 
-
-const SET_USER = "SET_USER"
-const LOGOUT_USER = "LOGOUT_USER"
 
 const userReducer = (state = defaultState,action) => {
 
