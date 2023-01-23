@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import universalStyles from '../../styles/UniversalStyles.module.css'
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
 
 const RegisterForm = () => {
     const [name, setName] = useState('')
@@ -21,7 +22,7 @@ const RegisterForm = () => {
             <Button htmlType={"submit"} extraClass={"mt-4 mb-20"}>Зарегистрироваться</Button>
             <div className={universalStyles.additionalLine}>
                 <p className={"text text_type_main-default text_color_inactive"}>Уже зарегистрированы?</p>
-                <p className={`text text_type_main-default ${universalStyles.additional}`}>Войти</p>
+                <Link to={'/login'} className={`text text_type_main-default ${universalStyles.additional}`}>Войти</Link>
             </div>
         </form>
     );

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import universalStyles from "../../styles/UniversalStyles.module.css";
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Link} from "react-router-dom";
 
 const ResetPasswordForm = () => {
     const [password,setPassword] = useState('')
@@ -18,7 +19,7 @@ const ResetPasswordForm = () => {
             <Button htmlType={"submit"} extraClass={"mt-4 mb-20"}>Сохранить</Button>
             <div className={universalStyles.additionalLine}>
                 <p className={"text text_type_main-default text_color_inactive"}>Вспомнили пароль?</p>
-                <p className={`text text_type_main-default ${universalStyles.additional}`}>Войти</p>
+                <Link to={'/login'} className={`text text_type_main-default ${universalStyles.additional}`}>Войти</Link>
             </div>
         </form>
     );

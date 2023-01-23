@@ -1,6 +1,7 @@
 import universalStyles from '../../styles/UniversalStyles.module.css'
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 const LoginForm = () => {
     const [password,setPassword] = useState('')
     const [email,setEmail] = useState('')
@@ -17,11 +18,11 @@ const LoginForm = () => {
             <Button htmlType={"submit"} extraClass={"mt-4 mb-20"}>Войти</Button>
             <div className={universalStyles.additionalLine}>
                 <p className={"text text_type_main-default"}>Вы - новый пользователь?</p>
-                <p className={`text text_type_main-default ${universalStyles.additional}`}>Зарегистрироваться</p>
+                <Link to={"/register"} className={`text text_type_main-default ${universalStyles.additional}`}>Зарегистрироваться</Link>
             </div>
-            <div className={universalStyles.flexContainer}>
+            <div className={universalStyles.additionalLine}>
                 <p className={`text text_type_main-default text_color_inactive`}>Забыли пароль?</p>
-                <p className={`text text_type_main-default ${universalStyles.additional}`}>Востановить пароль</p>
+                <Link to={"/forgot"} className={`text text_type_main-default ${universalStyles.additional}`}>Востановить пароль</Link>
             </div>
         </form>
     );
