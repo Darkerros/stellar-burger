@@ -12,6 +12,7 @@
 }
 
 .additional {
+    text-decoration: none;
     cursor: pointer;
     color: #4C4CFF;
 }
