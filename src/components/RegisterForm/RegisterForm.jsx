@@ -1,20 +1,45 @@
 import React, {useState} from 'react';
 import universalStyles from '../../styles/UniversalStyles.module.css'
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import Api from "../../api/Api";
+import {useDispatch} from "react-redux";
+import {setUserAction} from "../../services/actions/userAction";
+import useTokenStorage from "../../hooks/useTokenStorage";
 
 const RegisterForm = () => {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-
+    const dispatch = useDispatch()
+    const tokenStorage = useTokenStorage()
+    const navigate = useNavigate()
     const onEmailChange = event => setEmail(event.target.value)
     const onPasswordChange = event => setPassword(event.target.value)
     const onNameChange = event => setName(event.target.value)
 
+    const onSubmit = (evt) => {
+        evt.preventDefault()
+        if (email && name && password) {
+            Api.registrateUser(name,email,password)
+                .then(data => {
+                    const {user,accessToken,refreshToken} = data
+                    dispatch(setUserAction(user))
+                    tokenStorage.setAcessToken(refreshToken)
+                    tokenStorage.setToken(accessToken)
+                    navigate('/')
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+
+    }
+
 
     return (
-        <form className={universalStyles.form}>
+        <form className={universalStyles.form} onSubmit={onSubmit}>
             <h2 className={"text text_type_main-medium"}>Регистрация</h2>
             <Input value={name} onChange={onNameChange} extraClass={"mt-4"} placeholder={"Name"} name={"name"}/>
             <EmailInput value={email} onChange={onEmailChange} title={"Email"} extraClass={"mt-4"}/>
