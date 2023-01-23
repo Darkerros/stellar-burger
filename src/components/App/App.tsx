@@ -14,16 +14,23 @@ import {setUserAction} from "../../services/actions/userAction";
 
 function App() {
     const dispatch = useDispatch()
-    const {getToken} = useTokenStorage()
+    const {getToken,getRefreshToken,setToken} = useTokenStorage()
 
     useEffect(() => {
-
         Api.getUser(getToken())
             .then(date => {
                 const {user} = date
                 dispatch(setUserAction(user))
             })
-            .catch(err => console.log("Авторизация не удалась"))
+            .catch(err => {
+                const refreshToken = getRefreshToken()
+                if (refreshToken) {
+                    Api.updateToken(refreshToken)
+                        .then(data => {
+                            setToken(data.accessToken)
+                        })
+                }
+            })
 
     },[dispatch,getToken])
 

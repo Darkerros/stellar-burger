@@ -25,10 +25,9 @@ const RegisterForm = () => {
                 .then(data => {
                     const {user,accessToken,refreshToken} = data
                     dispatch(setUserAction(user))
-                    tokenStorage.setAcessToken(refreshToken)
+                    tokenStorage.setRefreshToken(refreshToken)
                     tokenStorage.setToken(accessToken)
                     navigate('/')
-                    console.log(data)
                 })
                 .catch(error => {
                     console.log(error)
