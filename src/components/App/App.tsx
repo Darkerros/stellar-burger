@@ -10,6 +10,8 @@ import {useDispatch} from "react-redux";
 import {resetUserAction, setUserAction} from "../../services/actions/userAction";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import useUserController from "../../hooks/useUserController";
+import UnAuthRoute from "../UnAuthRoute/UnAuthRoute";
+import AuthRoute from "../AuthRoute/AuthRoute";
 
 
 function App() {
@@ -20,16 +22,15 @@ function App() {
         userController.checkAuth()
             .then(user => dispatch(setUserAction(user)))
             .catch(() => dispatch(resetUserAction()))
-
     },[dispatch, userController])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
-        {path: '/login', element: <LoginPage/>},
-        {path: "/register", element: <RegisterPage/>},
-        {path: "/reset", element: <ResetPasswordPage/>},
-        {path: "/forgot", element: <ForgotPasswordPage/>},
-        {path: "/profile", element: <ProfilePage/>},
+        {path: '/login', element: <UnAuthRoute><LoginPage/></UnAuthRoute>},
+        {path: "/register", element: <UnAuthRoute><RegisterPage/></UnAuthRoute>},
+        {path: "/reset", element: <UnAuthRoute><ResetPasswordPage/></UnAuthRoute>},
+        {path: "/forgot", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
+        {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "*", element: <MainPage/>}
     ])
 
