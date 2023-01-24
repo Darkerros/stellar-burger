@@ -2,17 +2,16 @@ import React, {useState} from 'react';
 import universalStyles from '../../styles/UniversalStyles.module.css'
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
-import Api from "../../api/Api";
 import {useDispatch} from "react-redux";
 import {setUserAction} from "../../services/actions/userAction";
-import useTokenStorage from "../../hooks/useTokenStorage";
+import useUserController from "../../hooks/useUserController";
 
 const RegisterForm = () => {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const dispatch = useDispatch()
-    const tokenStorage = useTokenStorage()
+    const userController = useUserController()
     const navigate = useNavigate()
     const onEmailChange = event => setEmail(event.target.value)
     const onPasswordChange = event => setPassword(event.target.value)
@@ -21,17 +20,12 @@ const RegisterForm = () => {
     const onSubmit = (evt) => {
         evt.preventDefault()
         if (email && name && password) {
-            Api.registrateUser(name,email,password)
-                .then(data => {
-                    const {user,accessToken,refreshToken} = data
+            userController.register(name,email,password)
+                .then(user => {
                     dispatch(setUserAction(user))
-                    tokenStorage.setRefreshToken(refreshToken)
-                    tokenStorage.setToken(accessToken)
-                    navigate('/')
+                    navigate(-1)
                 })
-                .catch(error => {
-                    console.log(error)
-                })
+
         }
 
     }
