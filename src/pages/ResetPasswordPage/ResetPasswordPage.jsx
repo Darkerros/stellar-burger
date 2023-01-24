@@ -6,7 +6,7 @@ const ResetPasswordPage = () => {
     const location = useLocation()
 
     return (
-        location.state?.from === "reset"
+        location.state?.from === "/forgot"
             ?
             <>
                 <AppHeader/>
