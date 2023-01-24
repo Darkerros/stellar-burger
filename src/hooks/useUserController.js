@@ -16,7 +16,13 @@ const useUserController = () => {
     return data.user
   })
 
-  return {checkAuth,login}
+  const logout = () => Api.logout(tokenStorage.getRefreshToken()).then(() => {
+    tokenStorage.setToken(null)
+    tokenStorage.setRefreshToken(null)
+    return null
+  })
+
+  return {checkAuth,login,logout}
 }
 
 export default useUserController;
