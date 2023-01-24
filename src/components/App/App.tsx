@@ -2,39 +2,26 @@ import appStyles from './App.module.css';
 import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
 import MainPage from "../../pages/MainPage/MainPage";
 import {useEffect} from "react";
-import Api from "../../api/Api";
-import useTokenStorage from "../../hooks/useTokenStorage";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import {useDispatch} from "react-redux";
-import {setUserAction} from "../../services/actions/userAction";
+import {resetUserAction, setUserAction} from "../../services/actions/userAction";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import useUserController from "../../hooks/useUserController";
 
 
 function App() {
     const dispatch = useDispatch()
-    const {getToken,getRefreshToken,setToken,setRefreshToken} = useTokenStorage()
+    const userController = useUserController()
 
     useEffect(() => {
-        Api.getUser(getToken())
-            .then(date => {
-                const {user} = date
-                dispatch(setUserAction(user))
-            })
-            .catch(err => {
-                const refreshToken = getRefreshToken()
-                if (refreshToken) {
-                    Api.updateToken(refreshToken)
-                        .then(data => {
-                            setToken(data.accessToken)
-                            setRefreshToken(data.refreshToken)
-                        })
-                }
-            })
+        userController.checkAuth()
+            .then(user => dispatch(setUserAction(user)))
+            .catch(() => dispatch(resetUserAction()))
 
-    },[dispatch,getToken])
+    },[dispatch, userController])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
