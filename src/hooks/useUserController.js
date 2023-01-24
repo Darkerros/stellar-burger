@@ -20,7 +20,12 @@ const useUserController = () => {
 
   const checkAuth = () => getUser().catch(() => updateRefreshToken().then(() => getUser()))
 
-  const login = (email,password) => Api.login(email,password).then(data => data.user)
+  const login = (email,password) => Api.login(email,password).then(data => {
+      const {user,accessToken,refreshToken} = data
+      tokenStorage.setRefreshToken(refreshToken)
+      tokenStorage.setToken(accessToken)
+      return user
+  })
 
   const logout = () => Api.logout(tokenStorage.getRefreshToken()).then(() => {
     tokenStorage.setToken(null)
