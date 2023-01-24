@@ -1,5 +1,6 @@
 import useTokenStorage from "./useTokenStorage";
 import Api from "../api/Api";
+import {setUserAction} from "../services/actions/userAction";
 
 const useUserController = () => {
   const tokenStorage = useTokenStorage()
@@ -22,7 +23,15 @@ const useUserController = () => {
     return null
   })
 
-  return {checkAuth,login,logout}
+  const register = (name,email,password) => Api.registrateUser(name,email,password)
+      .then(data => {
+        const {user,accessToken,refreshToken} = data
+        tokenStorage.setRefreshToken(refreshToken)
+        tokenStorage.setToken(accessToken)
+        return user
+      })
+
+  return {checkAuth,login,logout,register}
 }
 
 export default useUserController;
