@@ -24,8 +24,9 @@ class Api {
     login = (email,password) => this.createRequest(`${this.baseUrl}/api/auth/login`,"POST",{password, email})
     updateToken = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/token`,"POST",{token: refreshToken})
     logout = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/logout`,"POST",{token: refreshToken})
-
     getUser = (token) => this.createRequest(`${this.baseUrl}/api/auth/user`,"GET",null,token)
+    resetPassword = (email) => this.createRequest(`${this.baseUrl}/api/password-reset`,"POST",{email})
+    resetPasswordAccept = (password,code) => this.createRequest(`${this.baseUrl}/api/password-reset/reset`,"POST",{password,token: code})
 
 }
 

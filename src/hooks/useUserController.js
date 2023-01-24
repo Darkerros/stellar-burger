@@ -41,7 +41,10 @@ const useUserController = () => {
         return user
       })
 
-  return {checkAuth,login,logout,register}
+  const resetPassword = (email) => Api.resetPassword(email)
+  const resetPasswordAccept = (password,code) => Api.resetPasswordAccept(password,code)
+
+  return {checkAuth,login,logout,register,resetPassword,resetPasswordAccept}
 }
 
 export default useUserController;
