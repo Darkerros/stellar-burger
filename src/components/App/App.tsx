@@ -2,7 +2,7 @@ import appStyles from './App.module.css';
 import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
 import MainPage from "../../pages/MainPage/MainPage";
 import {useEffect} from "react";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -30,8 +30,9 @@ function App() {
         {path: "/register", element: <UnAuthRoute><RegisterPage/></UnAuthRoute>},
         {path: "/reset", element: <UnAuthRoute><ResetPasswordPage/></UnAuthRoute>},
         {path: "/forgot", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
+        {path: "/profile/orders", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
-        {path: "*", element: <MainPage/>}
+        {path: "*", element: <Navigate to={'/'}/>}
     ])
 
     return (
