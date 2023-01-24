@@ -1,6 +1,5 @@
 import useTokenStorage from "./useTokenStorage";
 import Api from "../api/Api";
-import {setUserAction} from "../services/actions/userAction";
 
 const useUserController = () => {
   const tokenStorage = useTokenStorage()
