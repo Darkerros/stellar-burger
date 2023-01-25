@@ -1,7 +1,7 @@
 import {checkResponse} from "../utils/utils";
 
 class Api {
-    constructor(props) {
+    constructor() {
         this.baseUrl =  'https://norma.nomoreparties.space'
     }
 
@@ -27,6 +27,7 @@ class Api {
     getUser = (token) => this.createRequest(`${this.baseUrl}/api/auth/user`,"GET",null,token)
     resetPassword = (email) => this.createRequest(`${this.baseUrl}/api/password-reset`,"POST",{email})
     resetPasswordAccept = (password,code) => this.createRequest(`${this.baseUrl}/api/password-reset/reset`,"POST",{password,token: code})
+    updateUserInfo = (updateUserInfo,token) => this.createRequest(`${this.baseUrl}/api/auth/user`,"PATCH",updateUserInfo,token)
 
 }
 

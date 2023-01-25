@@ -44,7 +44,14 @@ const useUserController = () => {
   const resetPassword = (email) => Api.resetPassword(email)
   const resetPasswordAccept = (password,code) => Api.resetPasswordAccept(password,code)
 
-  return {checkAuth,login,logout,register,resetPassword,resetPasswordAccept}
+  const updateProfileInfo = (email,password,name) => {
+      const userInfo = {email,name}
+      // eslint-disable-next-line no-unused-expressions
+      password !== "" ? userInfo.password = password : false
+      return Api.updateUserInfo(userInfo,tokenStorage.getToken()).then(data => data.user)
+  }
+
+  return {checkAuth,login,logout,register,resetPassword,resetPasswordAccept,getUser,updateProfileInfo}
 }
 
 export default useUserController;
