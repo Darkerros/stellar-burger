@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.textCentre {
+    text-align: center;
+}
+
 .title {
     max-width: 580px;
     overflow: hidden;

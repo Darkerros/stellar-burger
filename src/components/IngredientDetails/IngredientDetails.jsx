@@ -1,9 +1,10 @@
 import React from 'react';
 import ingredientDetailsStyles from './IngredientDetails.module.css'
 import ingredientType from "../../types/ingredientType";
+import PropTypes from "prop-types";
 
-const IngredientDetails = ({ingredientDetails}) => {
-    return (<div className={ingredientDetailsStyles.ingredientDetails + ' mt-10 mb-15 mr-10 ml-10'}>
+const IngredientDetails = ({ingredientDetails,textAlignCentre}) => {
+    return (<div className={ingredientDetailsStyles.ingredientDetails + ' mt-10 mb-15 mr-10 ml-10 ' + textAlignCentre ? ingredientDetailsStyles.textCentre : ""}>
             <p className={ingredientDetailsStyles.title + " text text_type_main-large mt-2 mb-2"}>Детали ингредиента</p>
             <img className={ingredientDetailsStyles.image} src={ingredientDetails.image_large}
                  alt={ingredientDetails.name ? ingredientDetails.name : 'Картинка ингредиента'}/>
@@ -29,6 +30,9 @@ const IngredientDetails = ({ingredientDetails}) => {
         </div>);
 };
 
-IngredientDetails.propTypes = {ingredientDetails: ingredientType.isRequired}
+IngredientDetails.propTypes = {
+    ingredientDetails: ingredientType.isRequired,
+    textAlignCentre: PropTypes.bool
+}
 
 export default IngredientDetails;
