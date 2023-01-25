@@ -28,13 +28,12 @@ const useUserController = () => {
       tokenStorage.setToken(accessToken)
       return user
   })
-
-  const logout = () => Api.logout(tokenStorage.getRefreshToken()).then(() => {
-    tokenStorage.setToken(null)
-    tokenStorage.setRefreshToken(null)
-    return null
-  })
-
+  const logout = () => Api.logout(tokenStorage.getRefreshToken())
+      .then(() => {
+        tokenStorage.setToken(null)
+        tokenStorage.setRefreshToken(null)
+        return null
+    })
   const register = (name,email,password) => Api.registrateUser(name,email,password)
       .then(data => {
         const {user,accessToken,refreshToken} = data
@@ -50,7 +49,7 @@ const useUserController = () => {
       const userInfo = {email,name}
       // eslint-disable-next-line no-unused-expressions
       password !== "" ? userInfo.password = password : false
-      return Api.updateUserInfo(userInfo,tokenStorage.getToken()).then(data => data.user).catch((err) => catchTokenExpires(err).then(() => Api.updateUserInfo(userInfo,tokenStorage.getToken())))
+      return Api.updateUserInfo(userInfo,tokenStorage.getToken()).then(data => data.user).catch((err) => catchTokenExpires(err).then(() => updateProfileInfo(email,password,name)))
   }
 
   return {checkAuth,login,logout,register,resetPassword,resetPasswordAccept,getUser,updateProfileInfo}
