@@ -4,8 +4,8 @@ import ingredientType from "../../types/ingredientType";
 import PropTypes from "prop-types";
 
 const IngredientDetails = ({ingredientDetails,textAlignCentre}) => {
-    return (<div className={ingredientDetailsStyles.ingredientDetails + ' mt-10 mb-15 mr-10 ml-10 ' + textAlignCentre ? ingredientDetailsStyles.textCentre : ""}>
-            <p className={ingredientDetailsStyles.title + " text text_type_main-large mt-2 mb-2"}>Детали ингредиента</p>
+    return (<div className={ingredientDetailsStyles.ingredientDetails + ' mt-10 mb-15 mr-10 ml-10 '}>
+            <p className={` text text_type_main-large mt-2 mb-2 ${ingredientDetailsStyles.title} ${textAlignCentre === true ? ingredientDetailsStyles.textCentre : " "}`}>Детали ингредиента</p>
             <img className={ingredientDetailsStyles.image} src={ingredientDetails.image_large}
                  alt={ingredientDetails.name ? ingredientDetails.name : 'Картинка ингредиента'}/>
             <p className={ingredientDetailsStyles.name + " text text_type_main-medium mt-5"}>{ingredientDetails.name}</p>
