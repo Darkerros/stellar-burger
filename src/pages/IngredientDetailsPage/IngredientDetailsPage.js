@@ -3,7 +3,6 @@ import styles from './IngredientDetailsPage.module.css'
 import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
 import {useLocation, useParams} from "react-router-dom";
 import Api from "../../api/Api";
-import AppMain from "../../components/AppMain/AppMain";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import MainPage from "../MainPage/MainPage";
 
