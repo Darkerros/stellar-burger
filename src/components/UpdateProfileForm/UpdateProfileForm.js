@@ -9,7 +9,7 @@ const UpdateProfileForm = () => {
     const [name,setName] = useState(defaultUserInfo?.name ? defaultUserInfo.name : "")
     const [email,setEmail] = useState(defaultUserInfo?.email ? defaultUserInfo.email : "")
     const [password,setPassword] = useState("")
-    const isEdit = defaultUserInfo?.name !== name || defaultUserInfo?.email !== email || password !== ""
+    const isEdit = defaultUserInfo === null ? false : defaultUserInfo?.name !== name || defaultUserInfo?.email !== email || password !== ""
 
     const onNameChange = evt => setName(evt.target.value)
     const onEmailChange = evt => setEmail(evt.target.value)
