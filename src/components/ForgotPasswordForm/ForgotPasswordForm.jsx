@@ -12,7 +12,7 @@ const ForgotPasswordForm = () => {
     const onSubmit = (evt) => {
         evt.preventDefault()
         if (email) {
-            userController.resetPassword(email).then(() => navigation("/reset", {state: {from: "/forgot"}}))
+            userController.resetPassword(email).then(() => navigation("/reset-password", {state: {from: "/forgot"}}))
         }
     }
 
