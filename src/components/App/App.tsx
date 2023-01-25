@@ -12,6 +12,7 @@ import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import useUserController from "../../hooks/useUserController";
 import UnAuthRoute from "../UnAuthRoute/UnAuthRoute";
 import AuthRoute from "../AuthRoute/AuthRoute";
+import IngredientDetailsPage from "../../pages/IngredientDetailsPage/IngredientDetailsPage";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         {path: "/forgot", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
         {path: "/profile/orders", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
+        {path: "/ingredients/:id", element: <IngredientDetailsPage/>},
         {path: "*", element: <Navigate to={'/'}/>}
     ])
 
