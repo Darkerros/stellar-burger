@@ -5,6 +5,7 @@ import {useLocation, useParams} from "react-router-dom";
 import Api from "../../api/Api";
 import AppMain from "../../components/AppMain/AppMain";
 import AppHeader from "../../components/AppHeader/AppHeader";
+import MainPage from "../MainPage/MainPage";
 
 const IngredientDetailsPage = () => {
     const location = useLocation()
@@ -25,7 +26,7 @@ const IngredientDetailsPage = () => {
     return (
         location.state?.from === "/"
             ?
-            <AppMain/>
+            <MainPage/>
             :
             ingredient
                 ?
