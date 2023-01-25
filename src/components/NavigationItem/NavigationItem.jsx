@@ -8,7 +8,20 @@ const NavigationItem = ({children, iconComponentName, active,to}) => {
     const location = useLocation()
     const [isActive,setIsActive] = useState(false)
 
-    useEffect(() => setIsActive(location.pathname === to),[location, to])
+    useEffect(() => {
+        const locList = location.pathname.split("/")
+        const toList = to.split("/")
+
+        const isActive = toList.every((to,index) => {
+            let haveInPath = to === locList[index]
+            if (!haveInPath) {
+                haveInPath = toList === undefined
+            }
+            return haveInPath
+        })
+        setIsActive(isActive)
+
+    },[location, to])
     const getICon = () => {
         if (iconComponentName === 'BurgerIcon') {
             return <BurgerIcon type={active ? "primary" : "secondary"}/>
