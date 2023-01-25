@@ -16,9 +16,11 @@ const useUserController = () => {
           return Promise.reject(err)
       })
 
+  const catchTokenExpires = error => error.message === "jwt expired" ? updateRefreshToken() : Promise.reject(error)
+
   const getUser = () => Api.getUser(tokenStorage.getToken()).then(data => data.user)
 
-  const checkAuth = () => getUser().catch(() => updateRefreshToken().then(() => getUser()))
+  const checkAuth = () => getUser().catch((err) => catchTokenExpires(err).then(() => getUser()))
 
   const login = (email,password) => Api.login(email,password).then(data => {
       const {user,accessToken,refreshToken} = data
@@ -48,7 +50,7 @@ const useUserController = () => {
       const userInfo = {email,name}
       // eslint-disable-next-line no-unused-expressions
       password !== "" ? userInfo.password = password : false
-      return Api.updateUserInfo(userInfo,tokenStorage.getToken()).then(data => data.user)
+      return Api.updateUserInfo(userInfo,tokenStorage.getToken()).then(data => data.user).catch((err) => catchTokenExpires(err).then(() => updateProfileInfo(userInfo)))
   }
 
   return {checkAuth,login,logout,register,resetPassword,resetPasswordAccept,getUser,updateProfileInfo}
