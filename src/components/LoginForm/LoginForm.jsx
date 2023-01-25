@@ -16,7 +16,6 @@ const LoginForm = () => {
 
     const onSubmit = (evt) => {
         evt.preventDefault()
-
         if (email && password) {
             userController.login(email,password)
                 .then(user => {
@@ -39,7 +38,7 @@ const LoginForm = () => {
             </div>
             <div className={universalStyles.additionalLine}>
                 <p className={`text text_type_main-default text_color_inactive`}>Забыли пароль?</p>
-                <Link to={"/forgot"} className={`text text_type_main-default ${universalStyles.additional}`}>Востановить пароль</Link>
+                <Link to={"/forgot-password"} className={`text text_type_main-default ${universalStyles.additional}`}>Востановить пароль</Link>
             </div>
         </form>
     );
