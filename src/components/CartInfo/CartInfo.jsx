@@ -7,12 +7,16 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {useDispatch, useSelector} from "react-redux";
 import {createOrderThunk} from "../../services/actions/createOrderThunk";
+import useAuth from "../../hooks/useAuth";
+import {useNavigate} from "react-router-dom";
 
 const CartInfo = ({cartPrice}) => {
     const [orderModalState, setOrderModalState] = useState(false)
     const order = useSelector(state => state.orderReducer)
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cartReducer)
+
+    const user = useAuth()
 
     const handleCloseOrderModal = () => {
         setOrderModalState(false)
@@ -21,8 +25,15 @@ const CartInfo = ({cartPrice}) => {
         setOrderModalState(true)
     }
 
+    const navigate = useNavigate()
+
     const handleCreateOrder = () => {
-        dispatch(createOrderThunk(cart, handleOpenOrderModal))
+        if (user.isAuth) {
+            dispatch(createOrderThunk(cart, handleOpenOrderModal))
+        }
+        else {
+            navigate('/login')
+        }
     }
 
     return (

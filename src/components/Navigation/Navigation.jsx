@@ -6,10 +6,10 @@ import navigationStyles from './Navigation.module.css'
 const Navigation = () => {
     return (
         <nav className={navigationStyles.Navigation}>
-            <NavigationItem iconComponentName="BurgerIcon" active={true}>Конструктор</NavigationItem>
-            <NavigationItem iconComponentName="ListIcon" active={false}>Лента заказов</NavigationItem>
-            <div className={navigationStyles.Navigation__logo}><Logo /></div>
-            <NavigationItem iconComponentName="ProfileIcon" active={false}>Личный кабинет</NavigationItem>
+            <NavigationItem iconComponentName="BurgerIcon" to={'/'}>Конструктор</NavigationItem>
+            <NavigationItem iconComponentName="ListIcon" to={'/orders'} >Лента заказов</NavigationItem>
+            <div className={navigationStyles.Navigation__logo} ><Logo /></div>
+            <NavigationItem iconComponentName="ProfileIcon" to={'/profile'}>Личный кабинет</NavigationItem>
         </nav>
     );
 };
