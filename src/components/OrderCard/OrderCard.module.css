@@ -1,0 +1,44 @@
+.card {
+    background-color: var(--background);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+
+    max-width: 584px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    max-width: 536px;
+}
+
+.ingredientsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 436px;
+}
+
+.ingredientImage {
+    margin-left: -10px;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: solid 1px #4c4cff;
+
+    background: #000000;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.priceIcon {
+    width: 22px;
+    height: 22px;
+}

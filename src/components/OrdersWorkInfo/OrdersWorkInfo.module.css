@@ -1,0 +1,45 @@
+.ordersWorkInfo {
+    display: flex;
+    gap: 36px;
+
+    min-height: 206px;
+}
+
+.workContainer {
+    max-width: 280px;
+    width: 280px;
+}
+
+.completeContainer {
+    max-width: 280px;
+    width: 280px;
+}
+
+.flexContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    list-style: none;
+    padding: 0;
+
+    overflow-y: scroll;
+    max-height: 152px;
+}
+
+.flexContainer::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.flexContainer::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+.active {
+
+}
+
+.complete {
+
+}

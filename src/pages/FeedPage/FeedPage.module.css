@@ -1,0 +1,35 @@
+.content {
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.title {
+    text-align: start;
+}
+
+.feeds {
+    max-height: 870px;
+    min-height: 870px;
+    width: fit-content;
+    overflow-y: scroll;
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.feeds::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.feeds::-webkit-scrollbar-thumb {
+    height: 250px;
+    background: #8585AD;
+}
+
+.feedContainer {
+    display: flex;
+}
