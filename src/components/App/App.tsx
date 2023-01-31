@@ -13,6 +13,7 @@ import useUserController from "../../hooks/useUserController";
 import UnAuthRoute from "../UnAuthRoute/UnAuthRoute";
 import AuthRoute from "../AuthRoute/AuthRoute";
 import IngredientDetailsPage from "../../pages/IngredientDetailsPage/IngredientDetailsPage";
+import FeedPage from "../../pages/FeedPage/FeedPage";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         {path: "/register", element: <UnAuthRoute><RegisterPage/></UnAuthRoute>},
         {path: "/reset-password", element: <UnAuthRoute><ResetPasswordPage/></UnAuthRoute>},
         {path: "/forgot-password", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
+        {path: "/feed", element: <UnAuthRoute><FeedPage/></UnAuthRoute>},
         {path: "/profile/orders", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/ingredients/:id", element: <IngredientDetailsPage/>},
