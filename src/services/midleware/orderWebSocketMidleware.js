@@ -27,8 +27,7 @@ export const orderWebSocketMidleware = () => store => {
                 socket.send(JSON.stringify(payload))
             }
 
-            if (type === WEBSOCKET_CLOSE_CONNECTION) {
-                console.log("START CLOSE")
+            if (type === WEBSOCKET_CLOSE_CONNECTION && socket.readyState === 1) {
                 socket.close(1000)
                 socket = null
             }
