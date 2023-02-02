@@ -3,7 +3,7 @@ import styles from './OrderCard.module.css'
 
 import priceIcon from '../../images/icons/money-icon.png'
 
-const OrderCard = ({id,date,title,ingredients,price}) => {
+const OrderCard = ({id,date,title,ingredients,price,getIngredientImageFn}) => {
     return (
         <div className={`pt-6 pb-6 pl-6 pr-6 ${styles.card}`}>
             <div className={styles.info}>
@@ -13,7 +13,7 @@ const OrderCard = ({id,date,title,ingredients,price}) => {
             <p className={`text text_type_main-medium text_color_primary mt-6 ${styles.title}`}>{title}</p>
             <div className={`${styles.info} mt-6`}>
                 <div className={styles.ingredientsContainer}>
-                    {ingredients.map(ingredientImage => <img src={ingredientImage} className={styles.ingredientImage} alt={"Картинка ингредиента"}/>)}
+                    {ingredients.map((ingredientId,index) => ingredientId && <img key={`${id}-${index}-${ingredientId}`} src={getIngredientImageFn(ingredientId)} className={styles.ingredientImage} alt={"Картинка ингредиента"}/>)}
                 </div>
                 <div className={styles.price}>
                     <p className={"text text_type_main-small text_color_primary"}>{price}</p>
