@@ -5,3 +5,22 @@
 
     margin-top: 120px;
 }
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    max-height: 868px;
+    overflow-y: scroll;
+}
+
+.feed::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+}
+
+.feed::-webkit-scrollbar-thumb {
+    height: 250px;
+    background: #8585AD;
+}
