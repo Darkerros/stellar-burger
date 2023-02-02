@@ -32,7 +32,7 @@ function App() {
         {path: "/register", element: <UnAuthRoute><RegisterPage/></UnAuthRoute>},
         {path: "/reset-password", element: <UnAuthRoute><ResetPasswordPage/></UnAuthRoute>},
         {path: "/forgot-password", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
-        {path: "/feed", element: <UnAuthRoute><FeedPage/></UnAuthRoute>},
+        {path: "/feed", element: <FeedPage/>},
         {path: "/profile/orders", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/ingredients/:id", element: <IngredientDetailsPage/>},
