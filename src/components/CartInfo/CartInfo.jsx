@@ -9,12 +9,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {createOrderThunk} from "../../services/actions/createOrderThunk";
 import useAuth from "../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
+import useTokenStorage from "../../hooks/useTokenStorage";
 
 const CartInfo = ({cartPrice}) => {
-    const [orderModalState, setOrderModalState] = useState(false)
-    const order = useSelector(state => state.orderReducer)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
+    const tokenStorage = useTokenStorage()
+
     const cart = useSelector(state => state.cartReducer)
+    const order = useSelector(state => state.orderReducer)
+
+    const [orderModalState, setOrderModalState] = useState(false)
 
     const user = useAuth()
 
@@ -25,11 +30,10 @@ const CartInfo = ({cartPrice}) => {
         setOrderModalState(true)
     }
 
-    const navigate = useNavigate()
 
     const handleCreateOrder = () => {
         if (user.isAuth) {
-            dispatch(createOrderThunk(cart, handleOpenOrderModal))
+            dispatch(createOrderThunk(cart, handleOpenOrderModal,tokenStorage.getToken()))
         }
         else {
             navigate('/login')
