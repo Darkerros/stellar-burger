@@ -12,10 +12,6 @@ class Api {
                 "Content-type": 'application/json',
             },
         }
-        if (authorization) {
-            settings.headers.Authorization = authorization
-        }
-
         // eslint-disable-next-line no-unused-expressions
         authorization ? settings.headers.Authorization = authorization : false
         // eslint-disable-next-line no-unused-expressions
