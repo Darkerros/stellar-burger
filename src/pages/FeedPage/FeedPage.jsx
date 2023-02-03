@@ -10,11 +10,13 @@ import {
     webSocketOpenConnectionAction
 } from "../../services/actions/webSocketActions";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
+import {useIngredientsData} from "../../hooks/useIngredientsData";
 
 const FeedPage = () => {
     const dispatch = useDispatch()
     const ingredients = useSelector(state => state.ingredientsReducer.ingredients)
     const {total,totalToday,orders} = useSelector(state => state.orderWebSocketReducer)
+    const {getIngredientImage,getIngredientPrice} = useIngredientsData()
 
     const {completeOrdersList,inWorkOrdersList} = useMemo(() => {
         const ordersStates = {done: [], inWork : []}
@@ -29,23 +31,8 @@ const FeedPage = () => {
         return {completeOrdersList: ordersStates.done, inWorkOrdersList: ordersStates.inWork}
     },[orders])
 
-    const imageIngredientsDictionary = useMemo(() => {
-        const baseImageDictionary = {}
-        ingredients.forEach(ingredient => {
-            baseImageDictionary[ingredient._id] = ingredient.image_large
-        })
-        return baseImageDictionary
-    }, [ingredients])
-    const priceIngredientsDictionary = useMemo(() => {
-        const basePriceDictionary = {}
-        ingredients.forEach(ingredient => {
-            basePriceDictionary[ingredient._id] = ingredient.price
-        })
-        return basePriceDictionary
-    }, [ingredients])
-    const getIngredientImageFn = (ingredientId) => imageIngredientsDictionary[ingredientId]
 
-    const calculatePrice = (ingredientsIdList) => ingredientsIdList.reduce((a,id) => id ? a + priceIngredientsDictionary[id] : a,0)
+    const calculatePrice = (ingredientsIdList) => ingredientsIdList.reduce((a,ingredientId) => ingredientId ? a + getIngredientPrice(ingredientId) : a,0)
 
 
     useEffect(() => {
@@ -73,7 +60,7 @@ const FeedPage = () => {
                 <h2 className={"text text_type_main-large text_color_primary mt-10 mb-5"}>Лента заказов</h2>
                 <div className={styles.feedContainer}>
                     <div className={`${styles.feeds} pr-4`}>
-                        {orders.map(order => <OrderCard key={order.number} id={`#${order.number}`} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImageFn}/>)}
+                        {orders.map(order => <OrderCard key={order.number} id={`#${order.number}`} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage}/>)}
                     </div>
                     <div className={"ml-15"}>
                         <OrdersWorkInfo completeOrdersId={completeOrdersList} inWorkOrdersId={inWorkOrdersList}/>
