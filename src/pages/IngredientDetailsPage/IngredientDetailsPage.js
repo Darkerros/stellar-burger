@@ -5,11 +5,12 @@ import {useLocation, useParams} from "react-router-dom";
 import Api from "../../api/Api";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import MainPage from "../MainPage/MainPage";
+import Loading from "../../components/Loading/Loading";
 
 const IngredientDetailsPage = () => {
     const location = useLocation()
     const {id} = useParams()
-    const [ingredient,setIngredient] = useState(null)
+    const [ingredient, setIngredient] = useState(null)
 
     useEffect(() => {
         if (location.state?.from !== "/") {
@@ -19,8 +20,9 @@ const IngredientDetailsPage = () => {
                     setIngredient(ingredient)
                 })
                 .catch(err => console.log(err))
+
         }
-    },[id, location.state])
+    }, [id, location.state])
 
     return (
         location.state?.from === "/"
@@ -36,7 +38,7 @@ const IngredientDetailsPage = () => {
                     </div>
                 </>
                 :
-                <p className={"text text_color_primary text_type_main-large"}>Wait</p>
+                <Loading/>
     );
 };
 
