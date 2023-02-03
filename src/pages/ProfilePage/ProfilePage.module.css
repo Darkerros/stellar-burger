@@ -9,6 +9,7 @@
 .feed {
     display: flex;
     flex-direction: column;
+    min-width: 608px;
     gap: 24px;
 
     max-height: 868px;

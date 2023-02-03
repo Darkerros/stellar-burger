@@ -10,6 +10,7 @@
 .feeds {
     max-height: 870px;
     min-height: 870px;
+    min-width: 584px;
     width: fit-content;
     overflow-y: scroll;
 
