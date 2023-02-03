@@ -1,3 +1,7 @@
+.form {
+    min-width: 624px;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;
