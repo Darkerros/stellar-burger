@@ -8,7 +8,6 @@ import ForgotPasswordPage from "../../pages/ForgotPasswordPage/ForgotPasswordPag
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import {useDispatch} from "react-redux";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
-import useUserController from "../../hooks/useUserController";
 import UnAuthRoute from "../UnAuthRoute/UnAuthRoute";
 import AuthRoute from "../AuthRoute/AuthRoute";
 import IngredientDetailsPage from "../../pages/IngredientDetailsPage/IngredientDetailsPage";
@@ -19,9 +18,8 @@ import FeedDetailsPage from "../../pages/FeedDetailsPage/FeedDetailsPage";
 
 function App() {
     const dispatch = useDispatch()
-    const userController = useUserController()
 
-    useEffect(() => dispatch(checkAuthThunk() as any),[dispatch, userController])
+    useEffect(() => dispatch(checkAuthThunk() as any),[dispatch])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
