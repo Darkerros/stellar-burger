@@ -1,12 +1,12 @@
 import AppHeader from "../../components/AppHeader/AppHeader";
-import FeedDetails from "../../components/FeedDetails/FeedDetails";
+import OrderInfo from "../../components/OrderInfo/OrderInfo";
 
 const OrderDetailsPage = () => {
     return (
         <>
             <AppHeader/>
             <div className={"mt-10"}>
-                <FeedDetails/>
+                <OrderInfo/>
             </div>
         </>
     );

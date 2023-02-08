@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import styles from './FeedDetails.module.css'
+import styles from './OrderInfo.module.css'
 import priceIcon from "../../images/icons/money-icon.png";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,7 +11,7 @@ import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
 import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
 import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
 
-const FeedDetails = () => {
+const OrderInfo = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
     const ingredientsData = useIngredientsData()
@@ -28,7 +28,7 @@ const FeedDetails = () => {
         dispatch(getIngredientsThunk())
         dispatch(webSocketOpenConnectionAction("wss://norma.nomoreparties.space/orders/all"))
         return () => {dispatch(webSocketCloseConnectionAction())}
-        // eslint-disable-next-line 
+        // eslint-disable-next-line
     }, [])
 
 
@@ -60,4 +60,4 @@ const FeedDetails = () => {
     );
 };
 
-export default FeedDetails;
+export default OrderInfo;
