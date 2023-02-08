@@ -42,3 +42,7 @@
     width: 22px;
     height: 22px;
 }
+
+.link {
+    text-decoration: none;
+}
