@@ -13,13 +13,14 @@ import AuthRoute from "../AuthRoute/AuthRoute";
 import IngredientDetailsPage from "../../pages/IngredientDetailsPage/IngredientDetailsPage";
 import FeedPage from "../../pages/FeedPage/FeedPage";
 import {checkAuthThunk} from "../../services/actions/checkAuthThunk";
-import FeedDetailsPage from "../../pages/FeedDetailsPage/FeedDetailsPage";
+import OrderDetailsPage from "../../pages/OrderDetailsPage/OrderDetailsPage";
 
 
 function App() {
     const dispatch = useDispatch()
 
-    useEffect(() => dispatch(checkAuthThunk() as any),[dispatch])
+    // eslint-disable-next-line
+    useEffect(() => dispatch(checkAuthThunk() as any),[])
 
     const router = createBrowserRouter([
         {path: '/', element: <MainPage/>},
@@ -28,8 +29,9 @@ function App() {
         {path: "/reset-password", element: <UnAuthRoute><ResetPasswordPage/></UnAuthRoute>},
         {path: "/forgot-password", element: <UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>},
         {path: "/feed", element: <FeedPage/>},
-        {path: "/feed/:id", element: <FeedDetailsPage/>},
+        {path: "/feed/:id", element: <OrderDetailsPage/>},
         {path: "/profile/orders", element: <AuthRoute><ProfilePage/></AuthRoute>},
+        {path: "/profile/orders/:id", element: <AuthRoute><OrderDetailsPage/></AuthRoute>},
         {path: "/profile", element: <AuthRoute><ProfilePage/></AuthRoute>},
         {path: "/ingredients/:id", element: <IngredientDetailsPage/>},
         {path: "*", element: <Navigate to={'/'}/>}
