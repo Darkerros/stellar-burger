@@ -6,5 +6,5 @@ export const checkAuthThunk = () => (dispatch) => {
     dispatch(userStartLoadingAction())
     userController.checkAuth()
         .then(user => dispatch(userSucessLoadingAction(user)))
-        .catch(error => error.then(error => dispatch(dispatch(userFailLoadingAction(error.message)))))
+        .catch(error => dispatch(userFailLoadingAction(error.message)))
 }
