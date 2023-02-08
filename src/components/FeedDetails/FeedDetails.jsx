@@ -1,36 +1,44 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import styles from './FeedDetails.module.css'
 import priceIcon from "../../images/icons/money-icon.png";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {webSocketCloseConnectionAction, webSocketOpenConnectionAction} from "../../services/actions/webSocketActions";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
+import {useIngredientsData} from "../../hooks/useIngredientsData";
+import OrderDetailsItem from "../OrderDetailsItem/OrderDetailsItem";
+import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
+import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
+import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
 
 const FeedDetails = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
-    const {orders,ingredients} = useSelector(state => ({orders: state.orderWebSocketReducer.orders, ingredients: state.ingredientsReducer.ingredients}))
-    const order = orders.find(order => order._id === id) || null
+    const ingredientsData = useIngredientsData()
+    const ingredients = useSelector(superIngredientsSelector)
+    const orders = useSelector(superOrderWebSocketOrdersSelector)
 
+    const order = orders.find(order => order._id === id) || null
+    const [orderIngredients,setOrderIngredients] = useState([])
+    const ingredientsCountData = useIngredientsCountData(orderIngredients,false)
+
+    const orderPrice = useMemo(() => orderIngredients.reduce((prev,ingredient) => prev + ingredient.price,0),[orderIngredients])
 
     useEffect(() => {
         dispatch(getIngredientsThunk())
         dispatch(webSocketOpenConnectionAction("wss://norma.nomoreparties.space/orders/all"))
         return () => {dispatch(webSocketCloseConnectionAction())}
+        // eslint-disable-next-line 
     }, [])
 
-    useEffect(() => {
-        if (ingredients && orders && order) {
-            order.ingredients = order.ingredients.map(ingredientsId => {
-                if (ingredientsId) {
-                    const ingredientInfo = ingredients.find(ingredient => ingredient._id === ingredientsId)
-                    if (ingredientInfo) return ingredientInfo
-                }
-            })
-        }
-    },[ingredients,orders,order])
 
-    console.log(order)
+    useEffect(() => {
+        if (order && ingredients) {
+            const orderIngredients = order.ingredients.map(ingredientsId => ingredientsId && ingredientsData.getIngredientData(ingredientsId))
+            setOrderIngredients(orderIngredients)
+        }
+    },[ingredientsData, order,ingredients])
+
 
     return (
         <div className={`${styles.container}`}>
@@ -39,12 +47,12 @@ const FeedDetails = () => {
             <p className={"text text_type_main-small text_color_primary mt-3"}>Выполнен</p>
             <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
             <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
-
+                {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={ingredientsCountData.getIngredientCount(ingredient._id)}/>)}
             </div>
             <div className={`${styles.infoContainer} mt-10`}>
                 <p className={"text text_type_main-small text_color_inactive"}>Вчера, 13:50 i-GMT+3</p>
                 <div className={styles.price}>
-                    <p className={"text text_type_digits-default text_color_primary"}>510</p>
+                    <p className={"text text_type_digits-default text_color_primary"}>{orderPrice}</p>
                     <img src={priceIcon} alt="Иконка денег" className={styles.priceIcon}/>
                 </div>
             </div>
