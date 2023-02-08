@@ -19,6 +19,7 @@ const orderWebSocketReducer = (state = defaultState,action) => {
     switch (action.type) {
         case WEBSOCKET_OPEN_CONNECTION:
             return {
+                url: action.payload,
                 isError: false,
                 errorMessage: null,
                 isConnectionOpen: false,
@@ -26,11 +27,11 @@ const orderWebSocketReducer = (state = defaultState,action) => {
                 orders: [],
                 total: 0,
                 totalToday: 0,
-                ...state
             }
 
         case WEBSOCKET_CONNECTION_START:
             return {
+                ...state,
                 isError: false,
                 errorMessage: null,
                 isConnectionOpen: true,
@@ -38,25 +39,28 @@ const orderWebSocketReducer = (state = defaultState,action) => {
                 orders: [],
                 total: 0,
                 totalToday: 0,
-                ...state
             }
 
         case WEBSOCKET_CONNECTION_CLOSED:
             return {
+            url: null,
             isError: false,
             errorMessage: null,
             isConnectionOpen: false,
             isSucess: true,
-            ...state
+            orders: [],
+            total: 0,
+            totalToday: 0,
         }
 
         case WEBSOCKET_GET_MESSAGE:
             return {
+                ...state,
                 isError: false,
                 errorMessage: null,
                 isConnectionOpen: true,
                 isSucess: true,
-                orders: action.payload.orders.reverse(),
+                orders: action.payload.orders,
                 total: action.payload.total,
                 totalToday: action.payload.totalToday
             }
