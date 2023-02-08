@@ -1,14 +1,15 @@
 import AppHeader from "../../components/AppHeader/AppHeader";
 import FeedDetails from "../../components/FeedDetails/FeedDetails";
-import Modal from "../../components/Modal/Modal";
 
-const FeedDetailsPage = () => {
+const OrderDetailsPage = () => {
     return (
         <>
             <AppHeader/>
-            <FeedDetails/>
+            <div className={"mt-10"}>
+                <FeedDetails/>
+            </div>
         </>
     );
 };
 
-export default FeedDetailsPage;
+export default OrderDetailsPage;
