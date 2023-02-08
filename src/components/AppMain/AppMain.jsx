@@ -10,11 +10,12 @@ import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import {useLocation} from "react-router-dom";
+import {superIngredientsReducerSelector} from "../../services/selectors/ingredientsSelectors";
 
 const AppMain = () => {
     const dispatch = useDispatch()
     const location = useLocation()
-    const ingredients = useSelector(state => state.ingredientsReducer)
+    const ingredients = useSelector(superIngredientsReducerSelector)
     const [ingredientModalState, setIngredientModalState] = useState(!!location.state?.modalState)
     const closeIngredientModal = () => {
         setIngredientModalState(false)
