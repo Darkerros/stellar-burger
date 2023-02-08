@@ -11,44 +11,31 @@ import {
 } from "../../services/actions/webSocketActions";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import {useIngredientsData} from "../../hooks/useIngredientsData";
+import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
 
 const FeedPage = () => {
     const dispatch = useDispatch()
-    const ingredients = useSelector(state => state.ingredientsReducer.ingredients)
+    const ingredients = useSelector(superIngredientsSelector)
     const {total,totalToday,orders} = useSelector(state => state.orderWebSocketReducer)
     const {getIngredientImage,getIngredientPrice} = useIngredientsData()
 
     const {completeOrdersList,inWorkOrdersList} = useMemo(() => {
         const ordersStates = {done: [], inWork : []}
-        orders.forEach(order => {
-            if (order.status === "pending" || order.status === "created") {
-                ordersStates.inWork.push(order.number)
-            }
-            if (order.status === "done") {
-                ordersStates.done.push(order.number)
-            }
-        })
+        orders.forEach(order => order.status === "done" ? ordersStates.done.push(order.number) : ordersStates.inWork.push(order.number))
         return {completeOrdersList: ordersStates.done, inWorkOrdersList: ordersStates.inWork}
     },[orders])
 
-
     const calculatePrice = (ingredientsIdList) => ingredientsIdList.reduce((a,ingredientId) => ingredientId ? a + getIngredientPrice(ingredientId) : a,0)
 
-
     useEffect(() => {
-        if (!ingredients.length) {
-            dispatch(getIngredientsThunk())
-        }
+        if (!ingredients.length) dispatch(getIngredientsThunk())
         // eslint-disable-next-line
     },[ingredients])
 
 
     useEffect(() => {
         dispatch(webSocketOpenConnectionAction("wss://norma.nomoreparties.space/orders/all"))
-
-        return () => {
-            dispatch(webSocketCloseConnectionAction())
-        }
+        return () => {dispatch(webSocketCloseConnectionAction())}
         // eslint-disable-next-line
     },[])
 
@@ -60,7 +47,7 @@ const FeedPage = () => {
                 <h2 className={"text text_type_main-large text_color_primary mt-10 mb-5"}>Лента заказов</h2>
                 <div className={styles.feedContainer}>
                     <div className={`${styles.feeds} pr-4`}>
-                        {orders.map(order => <OrderCard key={order.number} id={`#${order.number}`} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage}/>)}
+                        {orders.map(order => <OrderCard elementPosition={"feed"} number={`#${order.number}`} key={order.number} id={order._id} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage}/>)}
                     </div>
                     <div className={"ml-15"}>
                         <OrdersWorkInfo completeOrdersId={completeOrdersList} inWorkOrdersId={inWorkOrdersList}/>
