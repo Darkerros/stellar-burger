@@ -10,6 +10,7 @@
 .ingredientsContainer {
     display: flex;
     flex-direction: column;
+    gap: 24px;
 
     height: 312px;
     max-height: 312px;
