@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styles from './OrderInfo.module.css'
 import priceIcon from "../../images/icons/money-icon.png";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {webSocketCloseConnectionAction, webSocketOpenConnectionAction} from "../../services/actions/webSocketActions";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
@@ -10,10 +10,14 @@ import OrderDetailsItem from "../OrderDetailsItem/OrderDetailsItem";
 import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
 import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
 import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
+import {websocketUrl} from "../../utils/websocketUrl";
+import useTokenStorage from "../../hooks/useTokenStorage";
 
 const OrderInfo = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
+    const location = useLocation()
+    const tokenStorage = useTokenStorage()
     const ingredientsData = useIngredientsData()
     const ingredients = useSelector(superIngredientsSelector)
     const orders = useSelector(superOrderWebSocketOrdersSelector)
@@ -26,7 +30,9 @@ const OrderInfo = () => {
 
     useEffect(() => {
         dispatch(getIngredientsThunk())
-        dispatch(webSocketOpenConnectionAction("wss://norma.nomoreparties.space/orders/all"))
+        const socketUrl = location.pathname.split("/")[1] === "profile" ? websocketUrl.userFeed(tokenStorage.getToken().split(" ")[1]) : websocketUrl.allFeedUrl
+
+        dispatch(webSocketOpenConnectionAction(socketUrl))
         return () => {dispatch(webSocketCloseConnectionAction())}
         // eslint-disable-next-line
     }, [])

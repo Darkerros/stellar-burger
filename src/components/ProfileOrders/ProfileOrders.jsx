@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import {webSocketCloseConnectionAction, webSocketOpenConnectionAction} from "../../services/actions/webSocketActions";
 import useTokenStorage from "../../hooks/useTokenStorage";
+import {websocketUrl} from "../../utils/websocketUrl";
 
 
 const ProfileOrders = () => {
@@ -25,7 +26,7 @@ const ProfileOrders = () => {
     },[ingredients])
 
     useEffect(() => {
-        dispatch(webSocketOpenConnectionAction("wss://norma.nomoreparties.space/orders?token="+tokenStorage.getToken().split(" ")[1]))
+        dispatch(webSocketOpenConnectionAction(websocketUrl.userFeed(tokenStorage.getToken().split(" ")[1])))
 
         return () => {
             dispatch(webSocketCloseConnectionAction())
