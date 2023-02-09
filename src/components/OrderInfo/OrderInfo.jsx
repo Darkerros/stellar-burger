@@ -12,6 +12,8 @@ import {superIngredientsSelector} from "../../services/selectors/ingredientsSele
 import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
 import {websocketUrl} from "../../utils/websocketUrl";
 import useTokenStorage from "../../hooks/useTokenStorage";
+import Loading from "../Loading/Loading";
+import {getDate, getStatus} from "../../utils/utils";
 
 const OrderInfo = () => {
     const {id} = useParams()
@@ -37,7 +39,6 @@ const OrderInfo = () => {
         // eslint-disable-next-line
     }, [])
 
-
     useEffect(() => {
         if (order && ingredients) {
             const orderIngredients = order.ingredients.map(ingredientsId => ingredientsId && ingredientsData.getIngredientData(ingredientsId))
@@ -45,24 +46,27 @@ const OrderInfo = () => {
         }
     },[ingredientsData, order,ingredients])
 
-
     return (
-        <div className={`${styles.container}`}>
-            <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#034533</p>
-            <p className={"text text_type_main-medium text_color_primary mt-10"}>Black Hole Singularity острый бургер</p>
-            <p className={"text text_type_main-small text_color_primary mt-3"}>Выполнен</p>
-            <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
-            <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
-                {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={ingredientsCountData.getIngredientCount(ingredient._id)}/>)}
-            </div>
-            <div className={`${styles.infoContainer} mt-10`}>
-                <p className={"text text_type_main-small text_color_inactive"}>Вчера, 13:50 i-GMT+3</p>
-                <div className={styles.price}>
-                    <p className={"text text_type_digits-default text_color_primary"}>{orderPrice}</p>
-                    <img src={priceIcon} alt="Иконка денег" className={styles.priceIcon}/>
+        order
+            ?
+            <div className={`${styles.container}`}>
+                <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{order.number}</p>
+                <p className={"text text_type_main-medium text_color_primary mt-10"}>{order.name}</p>
+                <p className={"text text_type_main-small text_color_primary mt-3"}>{getStatus(order.status)}</p>
+                <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
+                <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
+                    {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={ingredientsCountData.getIngredientCount(ingredient._id)}/>)}
+                </div>
+                <div className={`${styles.infoContainer} mt-10`}>
+                    <p className={"text text_type_main-small text_color_inactive"}>{getDate(order.createdAt)}</p>
+                    <div className={styles.price}>
+                        <p className={"text text_type_digits-default text_color_primary"}>{orderPrice}</p>
+                        <img src={priceIcon} alt="Иконка денег" className={styles.priceIcon}/>
+                    </div>
                 </div>
             </div>
-        </div>
+            :
+            <Loading/>
     );
 };
 
