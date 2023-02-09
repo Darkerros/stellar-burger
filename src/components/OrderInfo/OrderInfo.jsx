@@ -51,7 +51,7 @@ const OrderInfo = () => {
             ?
             <div className={`${styles.container}`}>
                 <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{order.number}</p>
-                <p className={"text text_type_main-medium text_color_primary mt-10"}>{order.name}</p>
+                <p className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}>{order.name}</p>
                 <p className={"text text_type_main-small text_color_primary mt-3"}>{getStatus(order.status)}</p>
                 <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
                 <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>

@@ -7,6 +7,10 @@
     text-align: center;
 }
 
+.title {
+    max-width: 640px;
+}
+
 .ingredientsContainer {
     display: flex;
     flex-direction: column;
