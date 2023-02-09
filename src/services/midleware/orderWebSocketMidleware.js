@@ -1,7 +1,7 @@
 import {
     WEBSOCKET_CLOSE_CONNECTION,
     WEBSOCKET_OPEN_CONNECTION, WEBSOCKET_SEND_MESSAGE,
-    webSocketCloseConnectionAction,
+    webSocketCloseConnectionAction, webSocketConnectionClosedAction,
     webSocketConnectionErrorAction,
     webSocketConnectionStartAction, webSocketGetMessageAction
 } from "../actions/webSocketActions";
@@ -19,7 +19,7 @@ export const orderWebSocketMidleware = () => store => {
         if (socket) {
 
             socket.onopen = event => dispatch(webSocketConnectionStartAction(event))
-            socket.onclose = event => dispatch(webSocketCloseConnectionAction(event))
+            socket.onclose = event => dispatch(webSocketConnectionClosedAction(event))
             socket.onerror = event => dispatch(webSocketConnectionErrorAction(event))
             socket.onmessage = event => dispatch(webSocketGetMessageAction(JSON.parse(event.data)))
 
