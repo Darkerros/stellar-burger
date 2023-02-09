@@ -1,5 +1,4 @@
 import React, {useEffect, useMemo} from 'react';
-import AppHeader from "../../components/AppHeader/AppHeader";
 import styles from './FeedPage.module.css'
 import OrderCard from "../../components/OrderCard/OrderCard";
 import OrdersWorkInfo from "../../components/OrdersWorkInfo/OrdersWorkInfo";
@@ -41,22 +40,19 @@ const FeedPage = () => {
 
 
     return (
-        <>
-            <AppHeader/>
-            <div className={styles.content}>
-                <h2 className={"text text_type_main-large text_color_primary mt-10 mb-5"}>Лента заказов</h2>
-                <div className={styles.feedContainer}>
-                    <div className={`${styles.feeds} pr-4`}>
-                        {orders.map(order => <OrderCard elementPosition={"feed"} number={`#${order.number}`} key={order.number} id={order._id} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage}/>)}
-                    </div>
-                    <div className={"ml-15"}>
-                        <OrdersWorkInfo completeOrdersId={completeOrdersList} inWorkOrdersId={inWorkOrdersList}/>
-                        <OrdersStat title={"Выполнено за все время:"} count={total} className={"mt-15"} key={"complete_all_time"}/>
-                        <OrdersStat title={"Выполнено за сегодня:"} count={totalToday} className={"mt-15"} key={"complete_today"}/>
-                    </div>
+        <div className={styles.content}>
+            <h2 className={"text text_type_main-large text_color_primary mt-10 mb-5"}>Лента заказов</h2>
+            <div className={styles.feedContainer}>
+                <div className={`${styles.feeds} pr-4`}>
+                            {orders.map(order => <OrderCard elementPosition={"feed"} number={`#${order.number}`} key={order.number} id={order._id} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage}/>)}
+                </div>
+                <div className={"ml-15"}>
+                    <OrdersWorkInfo completeOrdersId={completeOrdersList} inWorkOrdersId={inWorkOrdersList}/>
+                    <OrdersStat title={"Выполнено за все время:"} count={total} className={"mt-15"} key={"complete_all_time"}/>
+                    <OrdersStat title={"Выполнено за сегодня:"} count={totalToday} className={"mt-15"} key={"complete_today"}/>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
