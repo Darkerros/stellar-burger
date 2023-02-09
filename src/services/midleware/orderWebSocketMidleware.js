@@ -1,7 +1,7 @@
 import {
     WEBSOCKET_CLOSE_CONNECTION,
     WEBSOCKET_OPEN_CONNECTION, WEBSOCKET_SEND_MESSAGE,
-    webSocketCloseConnectionAction, webSocketConnectionClosedAction,
+    webSocketConnectionClosedAction,
     webSocketConnectionErrorAction,
     webSocketConnectionStartAction, webSocketGetMessageAction
 } from "../actions/webSocketActions";

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import styles from './OrderCard.module.css'
 
 import priceIcon from '../../images/icons/money-icon.png'
@@ -11,8 +11,6 @@ const OrderCard = ({elementPosition,orderInfo}) => {
     const price = useMemo(() => orderInfo.ingredients.reduce((a,ingredientId) => ingredientId ? a + ingredientsData.getIngredientPrice(ingredientId) : a,0),[ingredientsData, orderInfo.ingredients])
 
     const getLink = useCallback((linkPos) => linkPos === "feed" ? `/feed/${orderInfo._id}` : `/profile/orders/${orderInfo._id}`,[orderInfo])
-
-    useEffect(() => console.log("card"+orderInfo._id),[])
 
     return (
         <Link to={getLink(elementPosition)} className={styles.link}>
