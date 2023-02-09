@@ -1,29 +1,23 @@
 import styles from './ProfileOrders.module.css'
 import OrderCard from "../OrderCard/OrderCard";
 import {useDispatch, useSelector} from "react-redux";
-import {useIngredientsData} from "../../hooks/useIngredientsData";
 import {useEffect} from "react";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import {webSocketCloseConnectionAction, webSocketOpenConnectionAction} from "../../services/actions/webSocketActions";
 import useTokenStorage from "../../hooks/useTokenStorage";
 import {websocketUrl} from "../../utils/websocketUrl";
+import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
+import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
 
 
 const ProfileOrders = () => {
     const dispatch = useDispatch()
     const tokenStorage = useTokenStorage()
+    const orders = useSelector(superOrderWebSocketOrdersSelector)
+    const ingredients = useSelector(superIngredientsSelector)
 
-    const {getIngredientPrice,getIngredientImage} = useIngredientsData()
-    const orders = useSelector(state => state.orderWebSocketReducer.orders)
-    const ingredients = useSelector(state => state.ingredientsReducer.ingredients)
-
-    const calculatePrice = (ingredientsIdList) => ingredientsIdList.reduce((a,id) => id ? a + getIngredientPrice(id) : a,0)
-
-
-    useEffect(() => {
-        if (!ingredients.length) dispatch(getIngredientsThunk())
-        // eslint-disable-next-line
-    },[ingredients])
+    // eslint-disable-next-line
+    useEffect(() => {!ingredients.length && dispatch(getIngredientsThunk())},[ingredients])
 
     useEffect(() => {
         dispatch(webSocketOpenConnectionAction(websocketUrl.userFeed(tokenStorage.getToken().split(" ")[1])))
@@ -36,7 +30,7 @@ const ProfileOrders = () => {
 
     return (
         <div className={styles.feed + " pr-4"}>
-            {orders.map(order => <OrderCard status={order.status} key={order.number} number={`#${order.number}`} id={order._id} date={order.createAt} title={order.name} ingredients={order.ingredients} price={calculatePrice(order.ingredients)} getIngredientImageFn={getIngredientImage} elementPosition={"profileΩ"}/>)}
+            {orders.map(order => <OrderCard elementPosition={"profile"} orderInfo={order} key={order._id}/> )}
         </div>
     );
 };
