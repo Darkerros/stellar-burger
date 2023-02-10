@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './OrdersWorkInfo.module.css'
+import PropTypes from "prop-types";
 
 
 const OrdersWorkInfo = ({completeOrdersId,inWorkOrdersId}) => {
@@ -20,5 +21,10 @@ const OrdersWorkInfo = ({completeOrdersId,inWorkOrdersId}) => {
         </div>
     );
 };
+
+OrdersWorkInfo.propTypes = {
+    completeOrdersId: PropTypes.arrayOf(PropTypes.number.isRequired),
+    inWorkOrdersId: PropTypes.arrayOf(PropTypes.number.isRequired)
+}
 
 export default OrdersWorkInfo;
