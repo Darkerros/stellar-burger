@@ -1,4 +1,4 @@
-import {LOGOUT_USER, SET_USER, USER_FAIL_LOADING, USER_START_LOADING, USER_SUCESS_LOADING} from "../actions/userAction";
+import {LOGOUT_USER, SET_USER, USER_FAIL_LOADING, USER_START_LOADING, USER_SUCCESS_LOADING} from "../actions/userAction";
 
 const defaultState = {
     name : null,
@@ -20,7 +20,7 @@ const userReducer = (state = defaultState,action) => {
       case USER_START_LOADING:
           return {name: null, email: null,isLoading: true, isSuccess: false, isError: false, errorMessage: null}
 
-      case USER_SUCESS_LOADING:
+      case USER_SUCCESS_LOADING:
           return {name: action.payload.name, email: action.payload.email ,isLoading: false, isSuccess: true, isError: false, errorMessage: null}
 
       case USER_FAIL_LOADING:
