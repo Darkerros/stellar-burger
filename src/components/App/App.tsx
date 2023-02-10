@@ -33,16 +33,22 @@ function App() {
                 <Routes>
                     <Route path={"/"} element={<Layout/>}>
                         <Route index path="/" element={<MainPage/>}/>
+                        <Route  path="/feed">
+                            <Route index element={<FeedPage/>}/>
+                            <Route  path=":id" element={<OrderDetailsPage/>} />
+                        </Route>
+                        <Route  path="/profile">
+                            <Route index element={<AuthRoute><ProfilePage/></AuthRoute>}/>
+                            <Route  path="orders" >
+                                <Route index element={<AuthRoute><ProfilePage/></AuthRoute>}/>
+                                <Route  path=":id" element={<AuthRoute><OrderDetailsPage/></AuthRoute>}/>
+                            </Route>
+                        </Route>
+                        <Route  path="/ingredients/:id" element={<IngredientDetailsPage/>}/>
                         <Route  path="/login" element={<UnAuthRoute><LoginPage/></UnAuthRoute>}/>
                         <Route  path="/register" element={<UnAuthRoute><RegisterPage/></UnAuthRoute>}/>
                         <Route  path="/reset-password" element={<UnAuthRoute><ResetPasswordPage/></UnAuthRoute>}/>
                         <Route  path="/forgot-password" element={<UnAuthRoute><ForgotPasswordPage/></UnAuthRoute>}/>
-                        <Route  path="/feed" element={<FeedPage/>}/>
-                        <Route  path="/feed/:id" element={<OrderDetailsPage/>}/>
-                        <Route  path="/profile/orders/:id" element={<AuthRoute><OrderDetailsPage/></AuthRoute>}/>
-                        <Route  path="/profile/orders" element={<AuthRoute><ProfilePage/></AuthRoute>}/>
-                        <Route  path="/profile" element={<AuthRoute><ProfilePage/></AuthRoute>}/>
-                        <Route  path="/ingredients/:id" element={<IngredientDetailsPage/>}/>
                         <Route  path="*" element={<Navigate to={'/'}/>}/>
                     </Route>
                 </Routes>
