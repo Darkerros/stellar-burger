@@ -2,7 +2,7 @@ import {useCallback, useMemo} from "react";
 import {useSelector} from "react-redux";
 import {superIngredientsReducerSelector} from "../services/selectors/ingredientsSelectors";
 
-export const useIngredientsCountData = (arrayToCalculateCount,isIdArray = false) => {
+export const useIngredientsCountData = (arrayToCalculateCount) => {
     const ingredients = useSelector(superIngredientsReducerSelector)
 
     const ingredientsCountData = useMemo(() => {
