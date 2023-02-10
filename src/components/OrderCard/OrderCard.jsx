@@ -5,13 +5,15 @@ import priceIcon from '../../images/icons/money-icon.png'
 import {Link} from "react-router-dom";
 import {useIngredientsData} from "../../hooks/useIngredientsData";
 import {getDate, getStatus} from "../../utils/utils";
+import PropTypes from "prop-types";
+import {orderInfoType} from "../../types/orderInfoType";
 
 const OrderCard = ({elementPosition,orderInfo}) => {
     const ingredientsData = useIngredientsData()
-    const price = useMemo(() => orderInfo.ingredients.reduce((a,ingredientId) => ingredientId ? a + ingredientsData.getIngredientPrice(ingredientId) : a,0),[ingredientsData, orderInfo.ingredients])
+    const price = useMemo(() => orderInfo.ingredients.reduce((a,ingredientId) => ingredientId ? a + ingredientsData.getIngredientPrice(ingredientId) : a,0),[ingredientsData, orderInfo])
 
     const getLink = useCallback((linkPos) => linkPos === "feed" ? `/feed/${orderInfo._id}` : `/profile/orders/${orderInfo._id}`,[orderInfo])
-
+    console.log(orderInfo)
     return (
         <Link to={getLink(elementPosition)} className={styles.link}>
             <div className={`pt-6 pb-6 pl-6 pr-6 ${styles.card}`}>
@@ -34,5 +36,10 @@ const OrderCard = ({elementPosition,orderInfo}) => {
         </Link>
     );
 };
+
+OrderCard.propTypes = {
+    elementPosition: PropTypes.oneOf(["feed","profile"]).isRequired,
+    orderInfo: orderInfoType.isRequired
+}
 
 export default OrderCard;
