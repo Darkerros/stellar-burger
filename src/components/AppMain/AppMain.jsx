@@ -9,17 +9,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {superIngredientsReducerSelector} from "../../services/selectors/ingredientsSelectors";
 
 const AppMain = () => {
     const dispatch = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate()
     const ingredients = useSelector(superIngredientsReducerSelector)
     const [ingredientModalState, setIngredientModalState] = useState(!!location.state?.modalState)
     const closeIngredientModal = () => {
         setIngredientModalState(false)
         location.state.modalState = false
+        navigate("/")
     }
 
     // eslint-disable-next-line
