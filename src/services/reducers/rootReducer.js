@@ -3,14 +3,16 @@ import cartReducer from "./cartReducer";
 import ingredientsReducer from "./ingredientsReducer";
 import orderReducer from "./orderReducer";
 import userReducer from "./userReducer";
-import orderWebSocketReducer from "./orderWebSocketReducer";
+import userOrderWebSocketReducer from "./userOrderWebSocketReducer";
+import feedOrderWebSocketReducer from "./feedOrderWebSocketReducer";
 
 const rootReducer = combineReducers({
     cartReducer,
     ingredientsReducer,
     orderReducer,
     userReducer,
-    orderWebSocketReducer
+    userOrderWebSocketReducer,
+    feedOrderWebSocketReducer
 })
 
 export default rootReducer
