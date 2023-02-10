@@ -1,5 +1,7 @@
 import styles from './OrderDetailsItem.module.css'
 import priceIcon from '../../images/icons/money-icon.png'
+import ingredientType from "../../types/ingredientType";
+import PropTypes from "prop-types";
 
 const OrderDetailsItem = ({ingredient,count}) => {
     return (
@@ -13,5 +15,10 @@ const OrderDetailsItem = ({ingredient,count}) => {
         </div>
     );
 };
+
+OrderDetailsItem.propTypes = {
+    ingredient: ingredientType.isRequired,
+    count: PropTypes.number.isRequired
+}
 
 export default OrderDetailsItem;
