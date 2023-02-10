@@ -3,7 +3,7 @@ import {orderGetAction, orderLoadingAction, orderLoadingFailAction} from "./orde
 import {setBunAction, setCartAction} from "./cartActions";
 
 export const createOrderThunk = (cart,handleOpenOrderModal,token) => (dispatch) => {
-    const cartItemId = cart.bun ? [cart.bun._id,...cart.items.map(item => item._id)] : []
+    const cartItemId = cart.bun ? [cart.bun._id,...cart.items.map(item => item._id),cart.bun._id] : []
     dispatch(orderLoadingAction())
     Api.createOrder(cartItemId,token)
         .then(data => {
