@@ -52,7 +52,7 @@ const OrderInfo = () => {
             <div className={`${styles.container}`}>
                 <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{order.number}</p>
                 <p className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}>{order.name}</p>
-                <p className={"text text_type_main-small text_color_primary mt-3"}>{getStatus(order.status)}</p>
+                <p className={order.status === "done" ? "text text_type_main-small mt-3 text_color_success" : order.status === "created" ? "text text_type_main-small mt-3 text_color_primary" :  "text text_type_main-small mt-3 text_color_accent"}>{getStatus(order.status)}</p>
                 <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
                 <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
                     {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={ingredientsCountData.getIngredientCount(ingredient._id)}/>)}
