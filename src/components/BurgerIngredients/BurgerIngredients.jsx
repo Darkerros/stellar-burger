@@ -11,8 +11,7 @@ import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
 const BurgerIngredients = () => {
     const cart = useSelector(superCartReducerSelector)
     const ingredients = useSelector(superIngredientsReducerSelector)
-
-    const ingredientsCountData = useIngredientsCountData([cart.bun,...cart.items,cart.bun])
+    const ingredientsCountData = useIngredientsCountData(cart.bun ? [cart.bun,...cart.items,cart.bun] : cart.items)
 
     const groupedIngredients = useMemo(() => {
             const groupIngredients = [
