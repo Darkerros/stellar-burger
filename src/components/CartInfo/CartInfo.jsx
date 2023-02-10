@@ -10,18 +10,20 @@ import {createOrderThunk} from "../../services/actions/createOrderThunk";
 import useAuth from "../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
 import useTokenStorage from "../../hooks/useTokenStorage";
+import {superCartReducerSelector} from "../../services/selectors/cartSelectors";
+import {superOrderReducerSelector} from "../../services/selectors/orderSelectors";
 
 const CartInfo = ({cartPrice}) => {
+    const user = useAuth()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const tokenStorage = useTokenStorage()
 
-    const cart = useSelector(state => state.cartReducer)
-    const order = useSelector(state => state.orderReducer)
+    const cart = useSelector(superCartReducerSelector)
+    const order = useSelector(superOrderReducerSelector)
 
     const [orderModalState, setOrderModalState] = useState(false)
 
-    const user = useAuth()
 
     const handleCloseOrderModal = () => {
         setOrderModalState(false)
