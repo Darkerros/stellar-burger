@@ -4,11 +4,13 @@ import BurgerComponent from "../BurgerComponent/BurgerComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {addCartItemAction, deleteCartItemAction, setBunAction} from "../../services/actions/cartActions";
+import {superCartReducerSelector} from "../../services/selectors/cartSelectors";
 
 
 const BurgerComponents = () => {
-    const cart = useSelector(state => state.cartReducer)
     const dispatch = useDispatch()
+    const cart = useSelector(superCartReducerSelector)
+
     const deleteCartItem = (cartId) => dispatch(deleteCartItemAction(cartId))
     const [,dropContainerRef] = useDrop({
         accept: "ingredient",
@@ -17,14 +19,7 @@ const BurgerComponents = () => {
         }
     })
 
-    const dropHandler = (ingredient) => {
-        if (ingredient.type === "bun") {
-            dispatch(setBunAction(ingredient))
-        }
-        else {
-            dispatch(addCartItemAction(ingredient))
-        }
-    }
+    const dropHandler = (ingredient) => ingredient.type === "bun" ? dispatch(setBunAction(ingredient)) : dispatch(addCartItemAction(ingredient))
 
     const setNamePos = (position,ingredient) => {
         const pos = position === "top" ? " (верх)" : " (низ)"
