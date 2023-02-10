@@ -1,73 +1,40 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import styles from './OrderInfo.module.css'
 import priceIcon from "../../images/icons/money-icon.png";
-import {useLocation, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {webSocketCloseConnectionAction, webSocketOpenConnectionAction} from "../../services/actions/webSocketActions";
-import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
-import {useIngredientsData} from "../../hooks/useIngredientsData";
 import OrderDetailsItem from "../OrderDetailsItem/OrderDetailsItem";
-import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
-import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
-import {superOrderWebSocketOrdersSelector} from "../../services/selectors/orderWebSocketSelectors";
-import {websocketUrl} from "../../utils/websocketUrl";
-import useTokenStorage from "../../hooks/useTokenStorage";
-import Loading from "../Loading/Loading";
 import {getDate, getStatus} from "../../utils/utils";
+import {useIngredientsCountData} from "../../hooks/useIngredientsCountData";
+import {useIngredientsData} from "../../hooks/useIngredientsData";
+import {orderInfoType} from "../../types/orderInfoType";
 
-const OrderInfo = () => {
-    const {id} = useParams()
-    const dispatch = useDispatch()
-    const location = useLocation()
-    const tokenStorage = useTokenStorage()
-    const ingredientsData = useIngredientsData()
-    const ingredients = useSelector(superIngredientsSelector)
-    const orders = useSelector(superOrderWebSocketOrdersSelector)
-
-    const order = orders.find(order => order._id === id) || null
-    const [orderIngredients,setOrderIngredients] = useState([])
-    const ingredientsCountData = useIngredientsCountData(orderIngredients,false)
-
-    const orderPrice = useMemo(() => orderIngredients.reduce((prev,ingredient) => prev + ingredient.price,0),[orderIngredients])
-
-    useEffect(() => {
-        dispatch(getIngredientsThunk())
-        const socketUrl = location.pathname.split("/")[1] === "profile" ? websocketUrl.userFeed(tokenStorage.getToken().split(" ")[1]) : websocketUrl.allFeedUrl
-
-        dispatch(webSocketOpenConnectionAction(socketUrl))
-        return () => {dispatch(webSocketCloseConnectionAction())}
-        // eslint-disable-next-line
-    }, [])
-
-    useEffect(() => {
-        if (order && ingredients) {
-            const orderIngredients = order.ingredients.map(ingredientsId => ingredientsId && ingredientsData.getIngredientData(ingredientsId))
-            setOrderIngredients(orderIngredients)
-        }
-    },[ingredientsData, order,ingredients])
+const OrderInfo = ({orderInfo}) => {
+    const {getIngredientPrice,getIngredientData} = useIngredientsData()
+    const orderIngredients = useMemo(() => orderInfo.ingredients.map(ingredientId => getIngredientData(ingredientId)),[getIngredientData, orderInfo])
+    const {getIngredientCount} = useIngredientsCountData(orderIngredients)
+    const orderPrice = useMemo(() => orderInfo.ingredients.reduce((prev,ingredientId) => prev + getIngredientPrice(ingredientId),0),[getIngredientPrice,orderInfo])
 
     return (
-        order
-            ?
-            <div className={`${styles.container}`}>
-                <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{order.number}</p>
-                <p className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}>{order.name}</p>
-                <p className={order.status === "done" ? "text text_type_main-small mt-3 text_color_success" : order.status === "created" ? "text text_type_main-small mt-3 text_color_primary" :  "text text_type_main-small mt-3 text_color_accent"}>{getStatus(order.status)}</p>
-                <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
-                <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
-                    {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={ingredientsCountData.getIngredientCount(ingredient._id)}/>)}
-                </div>
-                <div className={`${styles.infoContainer} mt-10`}>
-                    <p className={"text text_type_main-small text_color_inactive"}>{getDate(order.createdAt)}</p>
-                    <div className={styles.price}>
-                        <p className={"text text_type_digits-default text_color_primary"}>{orderPrice}</p>
-                        <img src={priceIcon} alt="Иконка денег" className={styles.priceIcon}/>
-                    </div>
+        <div className={`${styles.container}`}>
+            <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{orderInfo.number}</p>
+            <p className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}>{orderInfo.name}</p>
+            <p className={orderInfo.status === "done" ? "text text_type_main-small mt-3 text_color_success" : orderInfo.status === "created" ? "text text_type_main-small mt-3 text_color_primary" : "text text_type_main-small mt-3 text_color_accent"}>{getStatus(orderInfo.status)}</p>
+            <p className={"text text_type_main-medium text_color_primary mt-15"}>Состав:</p>
+            <div className={`${styles.ingredientsContainer} mt-6 pr-4`}>
+                {[...new Set(orderIngredients)].map(ingredient => <OrderDetailsItem key={ingredient._id} ingredient={ingredient} count={getIngredientCount(ingredient._id)}/>)}
+            </div>
+            <div className={`${styles.infoContainer} mt-10`}>
+                <p className={"text text_type_main-small text_color_inactive"}>{getDate(orderInfo.createdAt)}</p>
+                <div className={styles.price}>
+                    <p className={"text text_type_digits-default text_color_primary"}>{orderPrice}</p>
+                    <img src={priceIcon} alt="Иконка денег" className={styles.priceIcon}/>
                 </div>
             </div>
-            :
-            <Loading/>
+        </div>
     );
 };
+
+OrderInfo.propTypes = {
+    orderInfo: orderInfoType.isRequired
+}
 
 export default OrderInfo;

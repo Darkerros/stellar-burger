@@ -15,7 +15,7 @@ const OrderCard = ({elementPosition,orderInfo}) => {
     const getLink = useCallback((linkPos) => linkPos === "feed" ? `/feed/${orderInfo._id}` : `/profile/orders/${orderInfo._id}`,[orderInfo])
 
     return (
-        <Link to={getLink(elementPosition)} className={styles.link} >
+        <Link to={getLink(elementPosition)} className={styles.link} state={{from: elementPosition,order: orderInfo}}>
             <div className={`pt-6 pb-6 pl-6 pr-6 ${styles.card}`}>
                 <div className={styles.info}>
                     <p className={"text text_type_main-small text_color_primary"}>#{orderInfo.number}</p>
