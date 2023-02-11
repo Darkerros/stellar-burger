@@ -23,6 +23,7 @@ export const getStatus = (status) => {
 export const getDate = (date) => {
     let day;
     const orderDate = new Date(Date.parse(date.replace("z","")))
+    const timeZone = -orderDate.getTimezoneOffset() / 60
     const currentDay = new Date().getDate()
 
     switch (orderDate.getDate()){
@@ -43,5 +44,5 @@ export const getDate = (date) => {
             break
     }
 
-    return `${day}, ${orderDate.toLocaleTimeString("ru-RU",{hour:"numeric",minute:"numeric"})} i-GMT+3`
+    return `${day}, ${orderDate.toLocaleTimeString("ru-RU",{hour:"numeric",minute:"numeric"})} i-GMT${timeZone > 0 && "+"}${timeZone}`
 }
