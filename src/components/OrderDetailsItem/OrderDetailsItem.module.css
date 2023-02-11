@@ -18,12 +18,13 @@
     width: 64px;
     height: 64px;
 
+    background: #131316;
     border-radius: 50%;
-    border: solid 1px #801AB2;
+    border: solid 2px #801AB2;
 }
 
 .image {
-    height: 56px;
+    height: 50px;
 }
 
 .count {
