@@ -13,7 +13,7 @@ const OrderCard = ({elementPosition,orderInfo}) => {
     const price = useMemo(() => orderInfo.ingredients.reduce((a,ingredientId) => ingredientId ? a + ingredientsData.getIngredientPrice(ingredientId) : a,0),[ingredientsData, orderInfo])
 
     const getLink = useCallback((linkPos) => linkPos === "feed" ? `/feed/${orderInfo._id}` : `/profile/orders/${orderInfo._id}`,[orderInfo])
-    console.log(orderInfo)
+
     return (
         <Link to={getLink(elementPosition)} className={styles.link} state={{from: elementPosition,order: orderInfo}}>
 
