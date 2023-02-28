@@ -47,7 +47,7 @@ const UpdateProfileForm = () => {
     },[defaultUserInfo])
 
     return (
-        <form onReset={resetForm} onSubmit={onSubmit}>
+        <form onReset={resetForm} onSubmit={onSubmit} className={styles.form}>
             <Input value={name} onChange={onNameChange} name={"name"} type={"text"} placeholder={"Имя"} size={undefined} />
             <EmailInput value={email} onChange={onEmailChange} name={"email"} type={"email"} placeholder={"Почта"} extraClass={'mt-6'} size={undefined}/>
             <PasswordInput value={password} onChange={onPasswordChange} name={"password"} type={"password"} placeholder={"Пароль"} extraClass={'mt-6'} size={undefined}/>

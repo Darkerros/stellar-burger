@@ -12,7 +12,10 @@
 }
 
 .title {
-    max-width: 536px;
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ingredientsContainer {
@@ -21,16 +24,70 @@
     max-width: 436px;
 }
 
-.ingredientImage {
-    margin-left: -10px;
+.ingredientImageContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
     width: 56px;
     height: 56px;
-    border-radius: 50%;
-    border: solid 1px #4c4cff;
 
+    border-radius: 50%;
+    border: solid 2px #801AB2;
+
+    margin-left: -10px;
     background: #000000;
+
+    composes: text from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
+    composes: text_color_primary from "../../../node_modules/@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css";
 }
+
+.ingredientImageContainer:nth-of-type(1) {
+    z-index: 6;
+    margin-left: 0;
+}
+.ingredientImageContainer:nth-of-type(2) {
+    z-index: 5;
+}
+.ingredientImageContainer:nth-of-type(3) {
+    z-index: 4;
+}
+.ingredientImageContainer:nth-of-type(4) {
+    z-index: 3;
+}
+.ingredientImageContainer:nth-of-type(5) {
+    z-index: 2;
+}
+
+.ingredientImageContainer:nth-of-type(6):after{
+    position: absolute;
+    content: attr(data-count);
+
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+
+    top: 0;
+    left: 0;
+
+    background: rgba(28, 28, 33,0.6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ingredientImage {
+    height: 50px;
+}
+
+
+
+
 
 .price {
     display: flex;
@@ -41,4 +98,8 @@
 .priceIcon {
     width: 22px;
     height: 22px;
+}
+
+.link {
+    text-decoration: none;
 }

@@ -19,7 +19,7 @@ class Api {
         return fetch(endpoint,settings).then(checkResponse)
     }
     getIngredients = () => this.createRequest(`${this.baseUrl}/api/ingredients`,"GET")
-    createOrder = (ingredientsList) => this.createRequest(`${this.baseUrl}/api/orders`,"POST",{ingredients: ingredientsList})
+    createOrder = (ingredientsList,token) => this.createRequest(`${this.baseUrl}/api/orders`,"POST",{ingredients: ingredientsList},token)
     registrateUser = (name,email,password) => this.createRequest(`${this.baseUrl}/api/auth/register`,"POST",{name, password, email})
     login = (email,password) => this.createRequest(`${this.baseUrl}/api/auth/login`,"POST",{password, email})
     updateToken = (refreshToken) => this.createRequest(`${this.baseUrl}/api/auth/token`,"POST",{token: refreshToken})
@@ -28,7 +28,6 @@ class Api {
     resetPassword = (email) => this.createRequest(`${this.baseUrl}/api/password-reset`,"POST",{email})
     resetPasswordAccept = (password,code) => this.createRequest(`${this.baseUrl}/api/password-reset/reset`,"POST",{password,token: code})
     updateUserInfo = (updateUserInfo,token) => this.createRequest(`${this.baseUrl}/api/auth/user`,"PATCH",updateUserInfo,token)
-
 }
 
 export default new Api();
