@@ -9,6 +9,10 @@
 
 .title {
     max-width: 640px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .ingredientsContainer {

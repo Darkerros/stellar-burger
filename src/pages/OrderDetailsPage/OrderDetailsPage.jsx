@@ -17,8 +17,6 @@ import {
     feedOrdersWebSocketStartConnectAction
 } from "../../services/actions/feedOrdersWebSocketActions";
 import Loading from "../../components/Loading/Loading";
-import FeedPage from "../FeedPage/FeedPage";
-import ProfilePage from "../ProfilePage/ProfilePage";
 
 const OrderDetailsPage = () => {
     const {id} = useParams()
@@ -37,13 +35,9 @@ const OrderDetailsPage = () => {
         if (!orders.length) {
             if (location.pathname.includes("feed")) {
                 dispatch(feedOrdersWebSocketStartConnectAction(websocketUrl.allFeedUrl))
-            } else {
-                dispatch(userOrdersWebSocketStartConnectAction(websocketUrl.userFeed(tokenStorage.getToken().replace("Bearer ",""))))
-            }
-
-            if (location.pathname.includes("feed")) {
                 return () => dispatch(feedOrdersWebSocketCloseConnectAction())
             } else {
+                dispatch(userOrdersWebSocketStartConnectAction(websocketUrl.userFeed(tokenStorage.getToken().replace("Bearer ", ""))))
                 return () => dispatch(userOrdersWebSocketCloseConnectAction())
             }
         }
@@ -51,22 +45,13 @@ const OrderDetailsPage = () => {
 
 
     return (
-        location.state?.from === "feed"
+        order
             ?
-            <FeedPage/>
+            <div className={"mt-10"}>
+                <OrderInfo orderInfo={order}/>
+            </div>
             :
-            location.state?.from === "profile"
-                ?
-                <ProfilePage/>
-                :
-                order
-                    ?
-                    <div className={"mt-10"}>
-                        <OrderInfo orderInfo={order}/>
-                    </div>
-                    :
-                    <Loading/>
-
+            <Loading/>
     );
 };
 

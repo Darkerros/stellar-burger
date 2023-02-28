@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import styles from './FeedPage.module.css'
 import OrderCard from "../../components/OrderCard/OrderCard";
 import OrdersWorkInfo from "../../components/OrdersWorkInfo/OrdersWorkInfo";
@@ -7,9 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getIngredientsThunk} from "../../services/actions/getIngredientsThunk";
 import {superIngredientsSelector} from "../../services/selectors/ingredientsSelectors";
 import {websocketUrl} from "../../utils/websocketUrl";
-import Modal from "../../components/Modal/Modal";
-import OrderInfo from "../../components/OrderInfo/OrderInfo";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import {
     feedOrdersWebSocketCloseConnectAction,
     feedOrdersWebSocketStartConnectAction
@@ -19,17 +17,8 @@ import Loading from "../../components/Loading/Loading";
 
 const FeedPage = () => {
     const dispatch = useDispatch()
-    const location = useLocation()
-    const navigate = useNavigate()
     const ingredients = useSelector(superIngredientsSelector)
     const {total,totalToday,orders} = useSelector(superFeedOrdersWebSocketReducerSelector)
-
-    const [orderInfoModalState,setOrderInfoModalState] = useState(location.state?.from === 'feed')
-
-    const handleCloseInfoModal = useCallback(() => {
-        setOrderInfoModalState(false)
-        navigate('/feed')
-    },[navigate])
 
     const {completeOrdersList,inWorkOrdersList} = useMemo(() => orders.reduce((prev,order) => order.status === "done" ? {...prev, completeOrdersList: [...prev.completeOrdersList,order.number]} : {...prev, inWorkOrdersList: [...prev.inWorkOrdersList,order.number]},{completeOrdersList: [],inWorkOrdersList: []}),[orders])
 
@@ -43,9 +32,6 @@ const FeedPage = () => {
         return () => {dispatch(feedOrdersWebSocketCloseConnectAction())}
         // eslint-disable-next-line
     },[])
-
-
-
 
     return (
         ingredients.length && orders.length
@@ -62,13 +48,7 @@ const FeedPage = () => {
                         <OrdersStat title={"Выполнено за сегодня:"} count={totalToday} className={"mt-15"} key={"complete_today"}/>
                     </div>
                 </div>
-                {orderInfoModalState &&
-                    <Modal handleClose={handleCloseInfoModal}>
-                        <div className={"mt-15 mb-15"}>
-                            <OrderInfo orderInfo={orders.find(order => order._id === location.state.order._id)}/>
-                        </div>
-                    </Modal>
-                }
+                <Outlet/>
             </div>
             :
             <Loading/>

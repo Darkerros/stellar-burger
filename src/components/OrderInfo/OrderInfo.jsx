@@ -14,7 +14,7 @@ const OrderInfo = ({orderInfo}) => {
     const orderPrice = useMemo(() => orderInfo.ingredients.reduce((prev,ingredientId) => prev + getIngredientPrice(ingredientId),0),[getIngredientPrice,orderInfo])
 
     return (
-        <div className={`${styles.container}`}>
+        <div className={`${styles.container} pt-15 pb-15`}>
             <p className={`text text_type_main-default text_color_primary ${styles.id}`}>#{orderInfo.number}</p>
             <p className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}>{orderInfo.name}</p>
             <p className={orderInfo.status === "done" ? "text text_type_main-small mt-3 text_color_success" : orderInfo.status === "created" ? "text text_type_main-small mt-3 text_color_primary" : "text text_type_main-small mt-3 text_color_accent"}>{getStatus(orderInfo.status)}</p>

@@ -3,7 +3,6 @@ import styles from './IngredientDetailsPage.module.css'
 import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
 import {useLocation, useParams} from "react-router-dom";
 import Api from "../../api/Api";
-import MainPage from "../MainPage/MainPage";
 import Loading from "../../components/Loading/Loading";
 
 const IngredientDetailsPage = () => {
@@ -24,17 +23,13 @@ const IngredientDetailsPage = () => {
     }, [id, location.state])
 
     return (
-        location.state?.from === "/"
+        ingredient
             ?
-            <MainPage/>
+            <div className={styles.container}>
+                <IngredientDetails ingredientDetails={ingredient} textAlignCentre={true}/>
+            </div>
             :
-            ingredient
-                ?
-                <div className={styles.container}>
-                    <IngredientDetails ingredientDetails={ingredient} textAlignCentre={true}/>
-                </div>
-                :
-                <Loading/>
+            <Loading/>
     );
 };
 
