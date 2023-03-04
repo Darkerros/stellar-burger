@@ -35,7 +35,7 @@ const ProfileOrders = () => {
     return (
         <div className={styles.feed + " pr-4"}>
             {orders.map(order => <OrderCard elementPosition={"profile"} orderInfo={order} key={order._id}/> )}
-            <Outlet/>
+            {ingredients.length && <Outlet/>}
         </div>
     );
 };
