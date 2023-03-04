@@ -53,6 +53,7 @@ const CartInfo = ({cartPrice}) => {
                 size="large"
                 htmlType={'button'}
                 onClick={handleCreateOrder}
+                disabled={!(cart.items.length && cart.bun)}
             >
                 Оформить заказ
             </Button>
