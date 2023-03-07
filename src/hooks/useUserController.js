@@ -1,5 +1,5 @@
 import useTokenStorage from "./useTokenStorage";
-import Api from "../api/Api";
+import Api from "../api/api";
 
 const useUserController = () => {
   const tokenStorage = useTokenStorage()

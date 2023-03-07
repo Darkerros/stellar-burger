@@ -1,4 +1,4 @@
-import Api from "../../api/Api";
+import Api from "../../api/api";
 import {ingredientsLoadAction, ingredientsLoadCompleteAction, ingredientsLoadFailAction} from "./ingredientsActions";
 
 export const getIngredientsThunk = () => dispatch => {

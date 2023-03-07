@@ -1,4 +1,4 @@
-import Api from "../../api/Api";
+import Api from "../../api/api";
 import {orderGetAction, orderLoadingAction, orderLoadingFailAction} from "./orderActions";
 import {setBunAction, setCartAction} from "./cartActions";
 
