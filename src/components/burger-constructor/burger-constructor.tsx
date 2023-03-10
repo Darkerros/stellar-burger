@@ -2,12 +2,12 @@ import React, {useMemo} from 'react';
 import burgerConstructorStyles from './burger-constructor.module.css'
 import BurgerComponents from "../burger-components/burger-components";
 import CartInfo from "../cart-info/cart-info";
-import {useSelector} from "react-redux";
 import {superCartReducerSelector} from "../../services/selectors/cart-selectors";
+import {useAppSelector} from "../../hooks/use-app-selector";
 
 
 const BurgerConstructor = () => {
-    const cart = useSelector(superCartReducerSelector)
+    const cart = useAppSelector(superCartReducerSelector)
     const cartPrice = useMemo(() => cart.items.reduce((prevPrice,cartItem) => prevPrice + cartItem.price,0) + (cart.bun ? cart.bun.price * 2 : 0), [cart])
 
     return (

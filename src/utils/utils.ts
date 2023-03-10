@@ -23,8 +23,8 @@ export const tokenStorage = {
 
 }
 
-export const checkResponse = (res: any) => {
-    return res.ok ? res.json() : res.json().then((data: any) => Promise.reject(data))
+export const checkResponse = (res: Response) => {
+    return res.ok ? res.json() : res.json().then((data) => Promise.reject(data))
 }
 
 export const getStatus = (status: ("created" | "pending" | "done")) => {

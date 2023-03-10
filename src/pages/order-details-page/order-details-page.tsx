@@ -1,10 +1,8 @@
 import OrderInfo from "../../components/order-info/order-info";
 import {useLocation, useParams} from "react-router-dom";
-import {superIngredientsSelector} from "../../services/selectors/ingredients-selectors";
 import {superUserOrdersWebSocketOrdersSelector} from "../../services/selectors/user-orders-websocket-selectors";
 import {superFeedOrdersWebSocketOrdersSelector} from "../../services/selectors/feed-orders-websocket-selectors";
 import {useEffect} from "react";
-import {getIngredientsThunk} from "../../services/thunks/get-ingredients-thunk";
 import {websocketUrl} from "../../utils/websocketUrl";
 import {
     userOrdersWebSocketCloseConnectAction,
@@ -24,14 +22,9 @@ const OrderDetailsPage = () => {
     const {id} = useParams()
     const location = useLocation()
     const dispatch = useAppDispatch()
-    const ingredients = useAppSelector(superIngredientsSelector)
     const orders = useAppSelector(location.pathname.includes("feed") ? superFeedOrdersWebSocketOrdersSelector : superUserOrdersWebSocketOrdersSelector)
 
     const order = location.state?.order || orders.find((order: IOrderInfo) => order._id === id)
-
-    useEffect(() => {
-        if (!ingredients.length) dispatch(getIngredientsThunk())
-    }, [dispatch, ingredients])
 
     useEffect(() => {
         if (!orders.length) {

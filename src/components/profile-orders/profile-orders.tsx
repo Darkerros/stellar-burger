@@ -1,7 +1,6 @@
 import styles from './profile-orders.module.css'
 import OrderCard from "../order-card/order-card";
 import React, {useEffect} from "react";
-import {getIngredientsThunk} from "../../services/thunks/get-ingredients-thunk";
 import {websocketUrl} from "../../utils/websocketUrl";
 import {superIngredientsSelector} from "../../services/selectors/ingredients-selectors";
 import {
@@ -20,8 +19,6 @@ const ProfileOrders = () => {
     const ingredients = useAppSelector(superIngredientsSelector)
     const orders = useAppSelector(superUserOrdersWebSocketOrdersSelector)
 
-    // eslint-disable-next-line
-    useEffect(() => {!ingredients.length && dispatch(getIngredientsThunk())},[ingredients])
 
     useEffect(() => {
         dispatch(userOrdersWebSocketStartConnectAction(websocketUrl.userFeed(tokenStorage.getToken()?.split(" ")[1])))

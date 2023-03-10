@@ -3,7 +3,6 @@ import styles from './feed-page.module.css'
 import OrderCard from "../../components/order-card/order-card";
 import OrdersWorkInfo from "../../components/orders-work-info/orders-work-info";
 import OrdersStat from "../../components/order-stat/orders-stat";
-import {getIngredientsThunk} from "../../services/thunks/get-ingredients-thunk";
 import {superIngredientsSelector} from "../../services/selectors/ingredients-selectors";
 import {websocketUrl} from "../../utils/websocketUrl";
 import {Outlet} from "react-router-dom";
@@ -23,11 +22,6 @@ const FeedPage = () => {
     const orderReducerState = useAppSelector(superFeedOrdersWebSocketReducerSelector)
 
     const {completeOrdersList,inWorkOrdersList} = useMemo(() => orderReducerState.orders.reduce((prev:{completeOrdersList: [],inWorkOrdersList: []},order: IOrderInfo) => order.status === "done" ? {...prev, completeOrdersList: [...prev.completeOrdersList,order.number]} : {...prev, inWorkOrdersList: [...prev.inWorkOrdersList,order.number]},{completeOrdersList: [],inWorkOrdersList: []}),[orderReducerState.orders])
-
-    useEffect(() => {
-        if (!ingredients.length) dispatch(getIngredientsThunk())
-        // eslint-disable-next-line
-    },[ingredients])
 
     useEffect(() => {
         dispatch(feedOrdersWebSocketStartConnectAction(websocketUrl.allFeedUrl))

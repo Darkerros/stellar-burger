@@ -9,6 +9,7 @@ import {IIngredient} from "../../types/data/ingredient-type";
 import {IChoseBun} from "../../types/data/chose-bun-interface";
 import {useAppSelector} from "../../hooks/use-app-selector";
 import {useAppDispatch} from "../../hooks/use-app-dispatch";
+import BunBurgerComponent from "../bun-burger-component/bun-burger-component";
 
 
 const BurgerComponents = () => {
@@ -33,11 +34,7 @@ const BurgerComponents = () => {
     return (
         <div className={burgerComponentStyles.BurgerComponents + " mt-25"} ref={dropContainerRef}>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                <BurgerComponent cartIngredient={cart.bun ? setNamePos("top",cart.bun) : ({name: "Выберите булку",price: 0})}
-                                 isLocked={true}
-                                 dragAndDropEnabled={false}
-                                 type={'top'}
-                                 handleClose={() => 1}/>
+                <BunBurgerComponent cartIngredient={cart.bun ? setNamePos("top",cart.bun) : ({name: "Выберите булку",price: 0, image: null})} type={"top"}/>
             </div>
             <ul className={burgerComponentStyles.BurgerComponents__unlocked + " pr-2"}>
                 {cart.items &&
@@ -50,11 +47,7 @@ const BurgerComponents = () => {
                                          handleClose={() => deleteCartItem(ingredient.cartId)} index={index}/>)}
             </ul>
             <div className={burgerComponentStyles.BurgerComponents__locked}>
-                <BurgerComponent cartIngredient={cart.bun ? setNamePos("bottom",cart.bun) : ({name: "Выберите булку",price: 0})}
-                                 isLocked={true}
-                                 dragAndDropEnabled={false}
-                                 type={'bottom'}
-                                 handleClose={() => 1}/>
+                <BunBurgerComponent cartIngredient={cart.bun ? setNamePos("bottom",cart.bun) : ({name: "Выберите булку",price: 0, image: null})} type={"bottom"}/>
             </div>
         </div>
     );

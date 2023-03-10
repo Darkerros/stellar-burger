@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, UIEventHandler} from 'react';
 import IngredientsColumn from "../ingredients-column/ingredients-column";
 import ingredientsStyles from './ingredients.module.css'
 import {IIngredientGroup} from "../../types/data/ingredient-group-interface";
@@ -13,8 +13,8 @@ interface IProps {
 }
 
 const Ingredients:FC<IProps> = ({tabInfoList,activeTab,handleSetActiveTab,getIngredientCountFn,groupedIngredients}) => {
-    const handleScroll = (evt: any) => {
-        const startPos = evt.target.offsetTop
+    const handleScroll:UIEventHandler<HTMLUListElement> = (evt) => {
+        const startPos = evt.currentTarget.offsetTop
         const activeTabs:string[] = []
         tabInfoList.forEach(tab => {
             if (tab) {

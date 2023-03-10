@@ -4,13 +4,14 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 
 import bunIcon from '../../images/icons/bun-icon.png'
 import {useDrag, useDrop} from "react-dnd";
-import {useDispatch} from "react-redux";
 import {sortCartAction} from "../../services/actions/cart-action-types";
+import {ICartItem} from "../../types/data/cart-item-interface";
+import {useAppDispatch} from "../../hooks/use-app-dispatch";
 
 
 interface IProps {
     dragAndDropEnabled: boolean;
-    cartIngredient: any;
+    cartIngredient: ICartItem;
     isLocked: boolean;
     handleClose: () => void;
     index?: number;
@@ -18,7 +19,7 @@ interface IProps {
 }
 
 const BurgerComponent:FC<IProps> = ({dragAndDropEnabled, cartIngredient, isLocked, type, handleClose,index}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const elemType = dragAndDropEnabled ? "cartItem" : 'unDragItem'
 
     const mainRef = useRef(null)

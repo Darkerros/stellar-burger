@@ -24,13 +24,18 @@ import ProfileOrders from "../profile-orders/profile-orders";
 import OrderInfo from "../order-info/order-info";
 import IngredientsDetails from "../ingredient-details/ingredients-details";
 import {useAppDispatch} from "../../hooks/use-app-dispatch";
+import {getIngredientsThunk} from "../../services/thunks/get-ingredients-thunk";
 
 function App() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    // eslint-disable-next-line
-    useEffect(() => {dispatch(checkAuthThunk())},[])
+
+    useEffect(() => {
+        dispatch(checkAuthThunk())
+        dispatch(getIngredientsThunk())
+        // eslint-disable-next-line
+    },[])
 
     return (
         <div className={appStyles.App}>
