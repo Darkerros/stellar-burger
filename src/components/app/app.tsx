@@ -10,13 +10,12 @@ import {
 import RegisterPage from "../../pages/register-page/register-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
 import LoginPage from "../../pages/login-page/login-page";
-import {useDispatch} from "react-redux";
 import ProfilePage from "../../pages/profile-page/profile-page";
 import UnAuthRoute from "../un-auth-route/un-auth-route";
 import AuthRoute from "../auth-route/auth-route";
 import IngredientsDetailsPage from "../../pages/ingredients-details-page/ingredients-details-page";
 import FeedPage from "../../pages/feed-page/feed-page";
-import {checkAuthThunk} from "../../services/actions/checkAuthThunk";
+import {checkAuthThunk} from "../../services/thunks/check-auth-thunk";
 import OrderDetailsPage from "../../pages/order-details-page/order-details-page";
 import Layout from "../layout/layout";
 import Modal from "../modal/modal";
@@ -24,14 +23,19 @@ import UpdateProfileForm from "../update-profile-form/update-profile-form";
 import ProfileOrders from "../profile-orders/profile-orders";
 import OrderInfo from "../order-info/order-info";
 import IngredientsDetails from "../ingredient-details/ingredients-details";
+import {useAppDispatch} from "../../hooks/use-app-dispatch";
+import {getIngredientsThunk} from "../../services/thunks/get-ingredients-thunk";
 
 function App() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    // eslint-disable-next-line
-    useEffect(() => dispatch(checkAuthThunk() as any), [])
 
+    useEffect(() => {
+        dispatch(checkAuthThunk())
+        dispatch(getIngredientsThunk())
+        // eslint-disable-next-line
+    },[])
 
     return (
         <div className={appStyles.App}>
